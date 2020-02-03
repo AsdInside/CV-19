@@ -60,9 +60,10 @@ public class Activity_login extends AppCompatActivity {
         campo_email = findViewById(R.id.Editviewemail);
         campo_password = findViewById(R.id.editTextpassword);
 
-        String email=campo_email.getText().toString();
+        String username=campo_email.getText().toString();
         String password=campo_password.getText().toString();
 
+        loginUser(username,password);
 
     }
 
