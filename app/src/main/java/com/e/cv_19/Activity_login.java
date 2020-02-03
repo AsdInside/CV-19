@@ -1,15 +1,14 @@
 package com.e.cv_19;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,7 +62,15 @@ public class Activity_login extends AppCompatActivity {
         String username=campo_email.getText().toString();
         String password=campo_password.getText().toString();
 
-        loginUser(username,password);
+
+        if (!isValidMail(username)) {
+            Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_LONG).show();
+        } else if (!isValidPassword(password)) {
+            Toast.makeText(getApplicationContext(), "La password deve avere almeno 5 caratteri", Toast.LENGTH_LONG).show();
+        } else {
+            loginUser(username,password);
+        }
+
 
     }
 
@@ -93,11 +100,22 @@ public class Activity_login extends AppCompatActivity {
 
     }
     public void Registrati_is_clicked(View view) {
-
+        Intent exp_int = new Intent(this,Activity_registrazione.class);
+        startActivity(exp_int);
     }
 
     public void Recupera_is_clicked(View view) {
 
+    }
+    private boolean isValidPassword(String password) {
+        String confermapassword=campo_password.getText().toString();
+        return confermapassword.equals(password) && password.length()>5;
+
+    }
+
+    private boolean isValidMail(String email){
+
+        return email.contains("@");
     }
 
 }

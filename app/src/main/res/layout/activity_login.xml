@@ -97,22 +97,6 @@
         app:layout_constraintVertical_bias="0.666"
         tools:text="Registrati" />
 
-    <TextView
-        android:id="@+id/textViewRecupera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="Recupera_is_clicked"
-        android:text="@string/recupera"
-        android:textColor="#F5EC07"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.854"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Recupera" />
-
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
