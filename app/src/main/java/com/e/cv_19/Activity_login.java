@@ -3,6 +3,8 @@ package com.e.cv_19;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +34,16 @@ public class Activity_login extends AppCompatActivity {
 
     private void updateUI(FirebaseUser currentUser) {
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+
+
+            String email = user.getEmail();
+            Intent intent = new Intent(this,Main_Activity.class);
+            intent.putExtra("msg",email);
+
+        }
+
     }
 
     @Override
@@ -48,9 +60,10 @@ public class Activity_login extends AppCompatActivity {
         campo_email = findViewById(R.id.Editviewemail);
         campo_password = findViewById(R.id.editTextpassword);
 
-        String email=campo_email.getText().toString();
+        String username=campo_email.getText().toString();
         String password=campo_password.getText().toString();
 
+        loginUser(username,password);
 
     }
 
