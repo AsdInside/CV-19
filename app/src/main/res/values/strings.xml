@@ -3,6 +3,7 @@
     <string name="registrati">Registrati</string>
     <string name="registrazione">Registrazione</string>
     <string name="recupera">Recupera</string>
+    <string name="Indietro">Indietro</string>
     <string name="password">Password</string>
     <string name="ripeti_password">Ripeti Password</string>
     <string name="Login">Login</string>
@@ -25,4 +26,6 @@
     <string name="Modifica_imp">Modifica Impostazioni</string>
     <string name="n_password">Nuova Password</string>
     <string name="v_password">Vecchia Password</string>
+    <string name="testo_recensione">Testo recensione</string>
+    <string name="valutazione">Valutazione</string>
 </resources>
