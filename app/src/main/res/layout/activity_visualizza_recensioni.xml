@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity_visualizza_recensioni">
+
+    <ListView
+        android:id="@+id/ListaRecensioni"
+        android:layout_width="wrap_content"
+        android:layout_height="644dp" />
+
+    <Button
+        android:id="@+id/buttonIndietro"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:background="#F5EC07"
+        android:text="@string/Indietro" />
+
+</LinearLayout>
