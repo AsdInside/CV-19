@@ -78,14 +78,16 @@ public class Activity_registrazione extends AppCompatActivity {
     public void Conferma_is_clicked(View view) {
         //validazione dati utente
         String nome = campo_nome.getText().toString();
+        String cognome = campo_cognome.getText().toString();
         String email = campo_email.getText().toString();
         String password = campo_password.getText().toString();
+        String ripeti_password = campo_ripeti_password.getText().toString();
 
         if (!isValidName(nome))
             Toast.makeText(getApplicationContext(), "Inserire almeno 5 caratteri", Toast.LENGTH_LONG).show();
         else if (!isValidMail(email)) {
             Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_LONG).show();
-        } else if (!isValidPassword(password)) {
+        } else if (!isValidPassword(password,ripeti_password)) {
             Toast.makeText(getApplicationContext(), "La password deve avere almeno 5 caratteri", Toast.LENGTH_LONG).show();
         } else {
             createUser(email,password);
@@ -93,31 +95,22 @@ public class Activity_registrazione extends AppCompatActivity {
     }
 
     public void Annulla_is_clicked(View view) {
-        Intent intent1 = new Intent(getApplicationContext(),Activity_login.class);
-        startActivity(intent1);
+        finish();
     }
 
 
     private boolean isValidName(String name) {
-
-            if(name.length()>5)
-                return true;
-            else
-                return false;
-
+        return name.length() > 5;
     }
 
 
     private boolean isValidMail(String email){
-
         return email.contains("@");
     }
 
 
-    private boolean isValidPassword(String password){
-
-        String confermapassword=campo_password.getText().toString();
-        return confermapassword.equals(password) && password.length()>5;
+    private boolean isValidPassword(String password,String ripeti_password){
+        return password.equals(ripeti_password) && password.length()>5;
     }
 
 }
