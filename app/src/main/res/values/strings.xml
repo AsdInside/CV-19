@@ -34,4 +34,7 @@
     <string name="immagine_struttura">Immagine Struttura</string>
     <string name="Visualizza">Visualizza</string>
     <string name="pubblica">Pubblica recensione</string>
+    <string name="confermare_password">confermare password</string>
+    <string name="vecchia_password">vecchia password</string>
+    <string name="nuova_password">nuova password</string>
 </resources>
