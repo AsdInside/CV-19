@@ -29,4 +29,9 @@
     <string name="testo_recensione">Testo recensione</string>
     <string name="valutazione">Valutazione</string>
     <string name="struttura">Struttura</string>
+    <string name="cerca_struttura">Ricerca struttura</string>
+    <string name="descrizione">Descrizione struttura</string>
+    <string name="immagine_struttura">Immagine Struttura</string>
+    <string name="Visualizza">Visualizza</string>
+    <string name="pubblica">Pubblica recensione</string>
 </resources>

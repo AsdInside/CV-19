@@ -17,10 +17,10 @@ public class Activity_modifica_impostazioni extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifica_impostazioni);
 
-        campo_email = findViewById(R.id.Editviewemail);
+        campo_email = findViewById(R.id.editTextEmail);
         campo_vecchia_password = findViewById(R.id.editTextVecchiaPassword);
         campo_nuova_password = findViewById(R.id.editTextNuovaPassword);
-        campo_ripeti_password = findViewById(R.id.editTextRipetiPassword);
+        campo_ripeti_password = findViewById(R.id.editTextRipetiVecchiaPassword);
     }
 
     public void Annulla_is_clicked(View view) {

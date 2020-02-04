@@ -42,7 +42,7 @@ public class Activity_registrazione extends AppCompatActivity {
         campo_nome = findViewById(R.id.editTextNome);
         campo_cognome = findViewById(R.id.editTextCognome);
         campo_email = findViewById(R.id.editTextEmail);
-        campo_password = findViewById(R.id.editTextpassword);
+        campo_password = findViewById(R.id.editTextPassword);
         campo_ripeti_password = findViewById(R.id.editTextRipetiPassword);
     }
 

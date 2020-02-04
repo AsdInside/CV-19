@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main_Activity"></activity>
-        <activity android:name=".Activity_modifica_impostazioni"></activity>
+        <activity android:name=".Activity_mostra_struttura"></activity>
+        <activity android:name=".Main_Activity" />
+        <activity android:name=".Activity_modifica_impostazioni" />
         <activity android:name=".Activity_recupera_password" />
-        <activity android:name=".Activity_visualizza_recensioni"></activity>
+        <activity android:name=".Activity_visualizza_recensioni" />
         <activity android:name=".Activity_registrazione" />
         <activity android:name=".Activity_login">
             <intent-filter>
