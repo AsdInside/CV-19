@@ -117,6 +117,8 @@
         android:id="@+id/textViewrecupero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="Recupera_is_clicked"
         android:text="@string/Hai_"
         android:textColor="#0C27CA"
         android:textSize="18sp"
