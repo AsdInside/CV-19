@@ -65,9 +65,9 @@ public class Activity_login extends AppCompatActivity {
 
 
         if (!isValidMail(username)) {
-            Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_SHORT).show();
         } else if (!isValidPassword(password)) {
-            Toast.makeText(getApplicationContext(), "La password deve avere almeno 5 caratteri", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "La password deve avere almeno 5 caratteri", Toast.LENGTH_SHORT).show();
         } else {
             loginUser(username,password);
         }
@@ -106,7 +106,8 @@ public class Activity_login extends AppCompatActivity {
     }
 
     public void Recupera_is_clicked(View view) {
-
+        Intent exp_int = new Intent(this,Activity_recupera_password.class);
+        startActivity(exp_int);
     }
 
 

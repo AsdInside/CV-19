@@ -96,15 +96,15 @@ public class Activity_registrazione extends AppCompatActivity {
         String ripeti_password = campo_ripeti_password.getText().toString();
 
         if (!isValidName(nickname))
-            Toast.makeText(getApplicationContext(), "Inserire nickname", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Inserire nickname", Toast.LENGTH_SHORT).show();
         else if (!isValidName(nome)) {
-            Toast.makeText(getApplicationContext(), "Inserire nome", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Inserire nome", Toast.LENGTH_SHORT).show();
         }else if (!isValidName(cognome)) {
-            Toast.makeText(getApplicationContext(), "Inserire cognome", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Inserire cognome", Toast.LENGTH_SHORT).show();
         }else if (!isValidMail(email)) {
-            Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_SHORT).show();
         } else if (!isValidPassword(password,ripeti_password)) {
-            Toast.makeText(getApplicationContext(), "Password non coincidente o inferiore a 5 caratteri", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Password non coincidente o inferiore a 5 caratteri", Toast.LENGTH_SHORT).show();
         } else {
             createUser(email,password);
         }
@@ -127,7 +127,7 @@ public class Activity_registrazione extends AppCompatActivity {
 
 
     private boolean isValidPassword(String password,String ripeti_password){
-        return password.equals(ripeti_password) && password.length()>5;
+        return password.equals(ripeti_password) && password.length()>4;
     }
 
     public void addFirestore(String nickname,String nome, String cognome){
