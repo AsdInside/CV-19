@@ -26,4 +26,7 @@ public class Activity_mostra_struttura extends AppCompatActivity {
 
     public void Ricerca(View view) {
     }
+
+    public void click_on_menù_laterale(View view) {
+    }
 }

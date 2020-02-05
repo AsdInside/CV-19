@@ -35,4 +35,9 @@
     <string name="Visualizza">Visualizza</string>
     <string name="pubblica">Pubblica recensione</string>
     <string name="title_activity_visualizza_mappa">Map</string>
+    <string name="località_turistiche">Località Turistiche</string>
+    <string name="menù_laterale">Menù Laterale</string>
+    <string name="hotel">Hotel</string>
+    <string name="ristoranti">Ristoranti</string>
+    <string name="nome_struttura">Nome Struttura</string>
 </resources>

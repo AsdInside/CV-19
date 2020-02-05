@@ -6,4 +6,133 @@
     android:layout_height="match_parent"
     tools:context=".Main_Activity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="599dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/campo_ricerca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/cerca_struttura"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
+
+        <ImageButton
+            android:id="@+id/lente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/cerca_struttura"
+            android:onClick="Ricerca"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            app:srcCompat="@android:drawable/ic_menu_search" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewMappa"
+        android:layout_width="359dp"
+        android:layout_height="205dp"
+        android:background="#862BEB10"
+        android:clickable="true"
+        android:contentDescription="@string/title_activity_visualizza_mappa"
+        android:focusable="true"
+        android:onClick="click_on_map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.288"
+        app:srcCompat="@android:drawable/ic_menu_mapmode" />
+
+    <LinearLayout
+        android:id="@+id/lista_strutture"
+        android:layout_width="409dp"
+        android:layout_height="361dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.994">
+
+        <ListView
+            android:id="@+id/Strutture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageButtonLocalitàTuristiche"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F7F0F0"
+        android:contentDescription="@string/località_turistiche"
+        android:onClick="click_on_località_turistiche"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.061"
+        app:srcCompat="@drawable/baseline_account_balance_black_18dp" />
+
+    <ImageButton
+        android:id="@+id/imageButtonMenùLaterale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F7F0F0"
+        android:contentDescription="@string/menù_laterale"
+        android:onClick="click_on_menù_laterale"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046"
+        app:srcCompat="@drawable/baseline_reorder_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/imageButtonHotel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F7F0F0"
+        android:contentDescription="@string/hotel"
+        android:onClick="click_on_hotel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.063"
+        app:srcCompat="@drawable/baseline_hotel_black_18dp" />
+
+    <ImageButton
+        android:id="@+id/imageButtonRistoranti"
+        android:layout_width="42dp"
+        android:layout_height="35dp"
+        android:background="#F7F0F0"
+        android:contentDescription="@string/ristoranti"
+        android:onClick="click_on_ristoranti"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.677"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06"
+        app:srcCompat="@drawable/baseline_local_dining_black_18dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
