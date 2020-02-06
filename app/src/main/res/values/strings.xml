@@ -40,4 +40,8 @@
     <string name="hotel">Hotel</string>
     <string name="ristoranti">Ristoranti</string>
     <string name="nome_struttura">Nome Struttura</string>
+    <string name="Cerca">Cerca</string>
+    <string name="categoria">Categoria</string>
+    <string name="città">Città</string>
+    <string name="recensioni">Recensioni</string>
 </resources>

@@ -120,15 +120,16 @@
         android:clickable="true"
         android:onClick="Recupera_is_clicked"
         android:text="@string/Hai_"
-        android:textColor="#0C27CA"
+        android:textColor="#F5EC07"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78"
-        tools:text="Recupera password" />
+        app:layout_constraintVertical_bias="0.782"
+        tools:text="Recupera password"
+        android:focusable="true" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

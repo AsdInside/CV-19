@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_ricerca">
+
+    <ImageButton
+        android:id="@+id/imageButtonHotel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F7F0F0"
+        android:contentDescription="@string/hotel"
+        android:onClick="click_on_hotel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.063"
+        app:srcCompat="@drawable/baseline_hotel_black_18dp" />
+
+    <ImageButton
+        android:id="@+id/imageButtonMenùLaterale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F7F0F0"
+        android:contentDescription="@string/menù_laterale"
+        android:onClick="click_on_menù_laterale"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046"
+        app:srcCompat="@drawable/baseline_reorder_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/imageButtonLocalitàTuristiche"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F7F0F0"
+        android:contentDescription="@string/località_turistiche"
+        android:onClick="click_on_località_turistiche"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.061"
+        app:srcCompat="@drawable/baseline_account_balance_black_18dp" />
+
+    <ImageButton
+        android:id="@+id/imageButtonRistoranti"
+        android:layout_width="42dp"
+        android:layout_height="35dp"
+        android:background="#F7F0F0"
+        android:contentDescription="@string/ristoranti"
+        android:onClick="click_on_ristoranti"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.677"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06"
+        app:srcCompat="@drawable/baseline_local_dining_black_18dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="599dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/campo_ricerca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/cerca_struttura"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
+
+        <ImageButton
+            android:id="@+id/lente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#0C27CA"
+            android:contentDescription="@string/cerca_struttura"
+            android:onClick="Ricerca"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            app:srcCompat="@android:drawable/ic_menu_search" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonRicercaAvanzata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F5EC07"
+        android:onClick="Ricerca_avanzata"
+        android:text="@string/Cerca"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.866" />
+
+    <Spinner
+        android:id="@+id/spinnerCittà"
+        android:layout_width="262dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.262" />
+
+    <Spinner
+        android:id="@+id/spinnerRecensioni"
+        android:layout_width="262dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.541" />
+
+    <Spinner
+        android:id="@+id/spinnerCategoria"
+        android:layout_width="262dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.391" />
+
+    <TextView
+        android:id="@+id/textViewCittà"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/città"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.275" />
+
+    <TextView
+        android:id="@+id/textViewCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/categoria"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.401" />
+
+    <TextView
+        android:id="@+id/textViewRecensioni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recensioni"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55" />
+</androidx.constraintlayout.widget.ConstraintLayout>

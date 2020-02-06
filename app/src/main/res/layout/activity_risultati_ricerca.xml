@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_risultati_ricerca">
+
+    <ImageButton
+        android:id="@+id/imageButtonMenùLaterale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F7F0F0"
+        android:contentDescription="@string/menù_laterale"
+        android:onClick="click_on_menù_laterale"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.055"
+        app:srcCompat="@drawable/baseline_reorder_black_24dp" />
+
+    <Button
+        android:id="@+id/buttonIndietro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F5EC07"
+        android:onClick="click_on_indietro"
+        android:text="@string/Indietro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.897"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.055" />
+
+    <LinearLayout
+        android:id="@+id/Ricerca"
+        android:layout_width="409dp"
+        android:layout_height="643dp"
+        android:layout_marginTop="84dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ListView
+            android:id="@+id/Risultati_ricerca"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

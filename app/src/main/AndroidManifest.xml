@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.e.cv_19">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -16,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Activity_ricerca"></activity>
+        <activity android:name=".Activity_risultati_ricerca" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -31,7 +31,7 @@
 
         <activity
             android:name=".Activity_visualizza_mappa"
-            android:label="@string/title_activity_visualizza_mappa"></activity>
+            android:label="@string/title_activity_visualizza_mappa" />
         <activity android:name=".Activity_mostra_struttura" />
         <activity android:name=".Main_Activity" />
         <activity android:name=".Activity_modifica_impostazioni" />
