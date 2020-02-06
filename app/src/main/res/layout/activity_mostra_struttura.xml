@@ -6,6 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".Activity_mostra_struttura">
 
+    <TextView
+        android:id="@+id/textViewVoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/voto"
+        android:textColor="#0C27CA"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.807" />
+
+    <Spinner
+        android:id="@+id/spinnerVoto"
+        android:layout_width="134dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:dropDownWidth="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.804" />
+
     <ImageButton
         android:id="@+id/imageButtonMenùLaterale"
         android:layout_width="wrap_content"
@@ -101,12 +129,22 @@
         <TextView
             android:id="@+id/textViewDescrizione"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="114dp"
             android:gravity="center_horizontal"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingBottom="5dp"
             android:text="@string/descrizione" />
+
+        <EditText
+            android:id="@+id/editTextTestoRecensione"
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:importantForAutofill="no"
+            android:ems="10"
+            android:hint="@string/testo_recensione"
+            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </LinearLayout>
 
     <Button
@@ -118,10 +156,10 @@
         android:text="@string/Visualizza"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.862" />
+        app:layout_constraintVertical_bias="0.894" />
 
     <Button
         android:id="@+id/buttonPubblica"
@@ -132,8 +170,8 @@
         android:text="@string/pubblica"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.862" />
+        app:layout_constraintVertical_bias="0.894" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".Activity_visualizza_recensioni_struttura">
+
+    <TextView
+        android:id="@+id/textViewNickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:text="@string/Nickname"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <TextView
+        android:id="@+id/textViewTestoRecensione"
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:text="@string/testo_recensione" />
+
+    <Button
+        android:id="@+id/buttonSegnala"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:background="#F5EC07"
+        android:onClick="click_on_segnala"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/segnala" />
+</LinearLayout>

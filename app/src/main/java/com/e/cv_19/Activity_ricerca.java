@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class Activity_ricerca extends AppCompatActivity {
 
     private EditText campo_ricerca;
+    private Spinner seleziona_città;
+    private Spinner seleziona_categoria;
+    private Spinner seleziona_recensioni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +20,9 @@ public class Activity_ricerca extends AppCompatActivity {
         setContentView(R.layout.activity_ricerca);
 
         campo_ricerca = findViewById(R.id.campo_ricerca);
+        seleziona_città = findViewById(R.id.spinnerCittà);
+        seleziona_categoria = findViewById(R.id.spinnerCategoria);
+        seleziona_recensioni = findViewById(R.id.spinnerRecensioni);
     }
 
     public void click_on_hotel(View view) {

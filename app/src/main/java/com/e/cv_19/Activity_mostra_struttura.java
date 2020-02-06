@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class Activity_mostra_struttura extends AppCompatActivity {
 
     private EditText campo_ricerca;
+    private EditText testo_recensione;
+    private Spinner voto_recensione;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +19,8 @@ public class Activity_mostra_struttura extends AppCompatActivity {
         setContentView(R.layout.activity_mostra_struttura);
 
         campo_ricerca = findViewById(R.id.campo_ricerca);
+        testo_recensione= findViewById(R.id.editTextTestoRecensione);
+        voto_recensione = findViewById(R.id.spinnerVoto);
     }
 
     public void Visualizza_recensioni_struttura(View view) {

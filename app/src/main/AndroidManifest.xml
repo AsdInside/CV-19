@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity_ricerca"></activity>
+        <activity android:name=".Activity_richiesta_cancellazione"></activity>
+        <activity android:name=".Activity_visualizza_recensioni_struttura" />
+        <activity android:name=".Activity_ricerca" />
         <activity android:name=".Activity_risultati_ricerca" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
