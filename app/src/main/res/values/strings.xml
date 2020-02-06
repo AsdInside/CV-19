@@ -49,4 +49,6 @@
     <string name="segnala">Segnala</string>
     <string name="motivazione">Motivazione</string>
     <string name="inserire_motivazione">Motivo richiesta cancellazione</string>
+    <string name="recensioni_personali">Recensioni effettuate</string>
+    <string name="ricerca_avanzata">Ricerca Avanzata</string>
 </resources>
