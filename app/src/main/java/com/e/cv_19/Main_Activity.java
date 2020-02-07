@@ -30,7 +30,7 @@ public class Main_Activity extends AppCompatActivity {
     public void click_on_località_turistiche(View view) {
     }
 
-    public void click_on_menù_laterale(View view) {
+    public void click_on_menù(View view) {
     }
 
     public void click_on_hotel(View view) {

@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:background="#F7F0F0"
         android:contentDescription="@string/menù_laterale"
-        android:onClick="click_on_menù_laterale"
+        android:onClick="click_on_menù"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
