@@ -51,4 +51,6 @@
     <string name="inserire_motivazione">Motivo richiesta cancellazione</string>
     <string name="recensioni_personali">Recensioni effettuate</string>
     <string name="ricerca_avanzata">Ricerca Avanzata</string>
+    <string name="menu">Menù</string>
+    <string name="logout">Logout</string>
 </resources>
