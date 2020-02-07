@@ -32,7 +32,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
-        android:id="@+id/textViewValitazione"
+        android:id="@+id/textViewValutazione"
         android:layout_width="match_parent"
         android:layout_height="37dp"
         android:gravity="center_horizontal"
