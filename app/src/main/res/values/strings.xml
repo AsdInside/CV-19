@@ -12,6 +12,7 @@
     <string name="inserire_email">inserire email</string>
     <string name="inserire_password">inserire password</string>
     <string name="inserire_n_password">inserire nuova password</string>
+    <string name="r_n_password">Ripeti nuova password</string>
     <string name="inserire_v_password">inserire vecchia password</string>
     <string name="inserire_nickname">inserire nickname</string>
     <string name="Nickname">Nickname</string>
