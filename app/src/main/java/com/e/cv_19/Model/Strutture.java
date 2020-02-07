@@ -1,5 +1,4 @@
 package com.e.cv_19.Model;
-
 public class Strutture {
 
     private String descrizione;
