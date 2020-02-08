@@ -1,5 +1,6 @@
 package com.e.cv_19.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -20,9 +21,12 @@ public class Activity_risultati_ricerca extends AppCompatActivity {
     }
 
     public void click_on_indietro(View view) {
+        finish();
     }
 
 
     public void click_on_menù(View view) {
+        Intent  Intent_menù = new Intent(this,Activity_menu.class);
+        startActivity(Intent_menù);
     }
 }
