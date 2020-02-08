@@ -30,8 +30,6 @@ public class Activity_ricerca extends AppCompatActivity {
     public void click_on_hotel(View view) {
     }
 
-    public void click_on_menù_laterale(View view) {
-    }
 
     public void click_on_località_turistiche(View view) {
     }
@@ -43,5 +41,8 @@ public class Activity_ricerca extends AppCompatActivity {
     }
 
     public void Ricerca_avanzata(View view) {
+    }
+
+    public void click_on_menù(View view) {
     }
 }

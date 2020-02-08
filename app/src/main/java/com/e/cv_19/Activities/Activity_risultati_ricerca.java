@@ -22,6 +22,7 @@ public class Activity_risultati_ricerca extends AppCompatActivity {
     public void click_on_indietro(View view) {
     }
 
-    public void click_on_menù_laterale(View view) {
+
+    public void click_on_menù(View view) {
     }
 }

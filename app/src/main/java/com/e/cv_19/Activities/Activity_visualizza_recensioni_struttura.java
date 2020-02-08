@@ -32,9 +32,6 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
     public void click_on_località_turistiche(View view) {
     }
 
-    public void click_on_menù_laterale(View view) {
-    }
-
     public void click_on_hotel(View view) {
     }
 
@@ -46,5 +43,8 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
 
     public void click_on_segnala(View view){
 
+    }
+
+    public void click_on_menù(View view) {
     }
 }
