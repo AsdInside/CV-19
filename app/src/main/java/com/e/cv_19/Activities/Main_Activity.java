@@ -6,6 +6,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.e.cv_19.Adapter.StruttureAdapter;
 import com.e.cv_19.Model.Strutture;
@@ -27,12 +29,13 @@ public class Main_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_);
+
         mAuth= FirebaseAuth.getInstance();
         FirebaseUser currentUser=mAuth.getCurrentUser();
         campo_ricerca = findViewById(R.id.campo_ricerca);
         lista_strutture = findViewById(R.id.Strutture);
-
+        setContentView(R.layout.activity_main_);
+        setUpRecyclerView();
         adapter.setOnItemClickListner(new StruttureAdapter.OnItemClickListner() {
             @Override
             public void onItemClick(DocumentSnapshot docSnapshot, int position) {
@@ -55,7 +58,7 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     private void gotoPage(Strutture s, String id) {
-
+    //TODO metodo da implementare
     }
 
     //Recupero dati dal db
@@ -70,12 +73,22 @@ public class Main_Activity extends AppCompatActivity {
     public void click_on_località_turistiche(View view) {
     }
 
-    public void click_on_menù_laterale(View view) {
-    }
+
 
     public void click_on_hotel(View view) {
     }
 
     public void click_on_ristoranti(View view) {
+    }
+    private void setUpRecyclerView() {
+
+
+
+
+
+        RecyclerView recyclerView = findViewById(R.id.Strutture);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 }
