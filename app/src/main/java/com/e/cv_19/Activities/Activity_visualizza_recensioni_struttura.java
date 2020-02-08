@@ -1,5 +1,6 @@
 package com.e.cv_19.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -42,9 +43,12 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
     }
 
     public void click_on_segnala(View view){
-
+        //potrebbe essere necessario spostare questo metodo nell'adapter e cambiare il context del
+        //layout riga recensioni struttura
     }
 
     public void click_on_menù(View view) {
+        Intent intent_menù = new Intent(this,Activity_menu.class);
+        startActivity(intent_menù);
     }
 }
