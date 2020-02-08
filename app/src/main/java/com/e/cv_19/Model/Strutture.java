@@ -8,6 +8,7 @@ public class Strutture {
     private String tipologia;
     private double latitudine;
     private double longitudine;
+    private double valutazione;
 
     public Strutture(){
 
@@ -78,6 +79,14 @@ public class Strutture {
 
     public void setLongitudine(double longitudine) {
         this.longitudine = longitudine;
+    }
+
+    public double getValutazione() {
+        return valutazione;
+    }
+
+    public void setValutazione(double valutazione) {
+        this.valutazione = valutazione;
     }
 }
 

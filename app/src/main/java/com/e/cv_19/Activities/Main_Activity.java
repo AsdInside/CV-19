@@ -7,9 +7,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.e.cv_19.Adapter.StruttureAdapter;
+import com.e.cv_19.Model.Strutture;
 import com.e.cv_19.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Main_Activity extends AppCompatActivity {
@@ -18,15 +22,40 @@ public class Main_Activity extends AppCompatActivity {
     private ListView lista_strutture;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference notebookRef = db.collection("Strutture");
-    //private MainAdapter adapter;
+    private StruttureAdapter adapter;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
-
+        mAuth= FirebaseAuth.getInstance();
+        FirebaseUser currentUser=mAuth.getCurrentUser();
         campo_ricerca = findViewById(R.id.campo_ricerca);
         lista_strutture = findViewById(R.id.Strutture);
+
+        adapter.setOnItemClickListner(new StruttureAdapter.OnItemClickListner() {
+            @Override
+            public void onItemClick(DocumentSnapshot docSnapshot, int position) {
+                Strutture s=docSnapshot.toObject(Strutture.class);
+                String id=docSnapshot.getId();
+                gotoPage(s,id);
+            }
+        });
+
+    }
+    protected void onStart(){
+        super.onStart();
+        adapter.startListening();
+    }
+
+    protected void onStop(){
+
+        super.onStop();
+        adapter.stopListening();
+    }
+
+    private void gotoPage(Strutture s, String id) {
+
     }
 
     //Recupero dati dal db

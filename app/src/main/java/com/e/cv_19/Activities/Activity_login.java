@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 
 public class Activity_login extends AppCompatActivity {
@@ -24,27 +26,6 @@ public class Activity_login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText campo_email;
     private EditText campo_password;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
-    private void updateUI(FirebaseUser currentUser) {
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-
-
-            String email = user.getEmail();
-            Intent intent = new Intent(this,Main_Activity.class);
-            intent.putExtra("msg",email);
-
-        }
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +37,33 @@ public class Activity_login extends AppCompatActivity {
         campo_password = findViewById(R.id.editTextpassword);
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    private void updateUI() {
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        firestore.setFirestoreSettings(settings);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+
+
+            String email = user.getEmail();
+            Intent intent = new Intent(this,Main_Activity.class);
+            intent.putExtra("msg",email);
+            startActivity(intent);
+
+        }
+
+    }
+
+
 
     public void Login_is_clicked(View view) {
 
@@ -68,7 +76,7 @@ public class Activity_login extends AppCompatActivity {
         if (!isValidMail(username)) {
             Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_SHORT).show();
         } else if (!isValidPassword(password)) {
-            Toast.makeText(getApplicationContext(), "La password deve avere almeno 5 caratteri", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "La password deve avere almeno 6 caratteri", Toast.LENGTH_SHORT).show();
         } else {
             loginUser(username,password);
         }
@@ -86,13 +94,14 @@ public class Activity_login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            finish();
+                            updateUI();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(Activity_login.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+
                         }
 
                         // ...

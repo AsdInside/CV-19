@@ -28,15 +28,12 @@ public class StruttureAdapter extends FirestoreRecyclerAdapter<Strutture, Strutt
         protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Strutture strutture) {
             noteHolder.textViewName.setText(strutture.getNome());
             Picasso.get().load(strutture.getImmagine()).into(noteHolder.imageV);
+            String valutazione= Double.toString(strutture.getValutazione());
+            noteHolder.textValutazione.setText(valutazione);
         }
 
 
-        public interface OnItemClickListner{
-        void onItemClick(DocumentSnapshot docSnapshot,int position);
-    }
-    public void setOnItemClickListner(OnItemClickListner listner){
-        this.listner = listner;
-    }
+
 
 
     public NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -68,6 +65,14 @@ public class StruttureAdapter extends FirestoreRecyclerAdapter<Strutture, Strutt
                 }
             });
         }
+    }
+    public interface OnItemClickListner{
+        void onItemClick(DocumentSnapshot docSnapshot,int position);
+    }
+
+    public void setOnItemClickListner(OnItemClickListner listner){
+
+        this.listner = listner;
     }
 
 }
