@@ -15,11 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.Activity_menu"></activity>
-        <activity android:name=".Activities.Activity_richiesta_cancellazione" />
-        <activity android:name=".Activities.Activity_visualizza_recensioni_struttura" />
-        <activity android:name=".Activities.Activity_ricerca" />
-        <activity android:name=".Activities.Activity_risultati_ricerca" />
+        <activity android:name=".Activity_menu"/>
+        <activity android:name=".Activity_richiesta_cancellazione" />
+        <activity android:name=".Activity_visualizza_recensioni_struttura" />
+        <activity android:name=".Activity_ricerca" />
+        <activity android:name=".Activity_risultati_ricerca" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -33,15 +33,15 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Activities.Activity_visualizza_mappa"
+            android:name=".Activity_visualizza_mappa"
             android:label="@string/title_activity_visualizza_mappa" />
-        <activity android:name=".Activities.Activity_mostra_struttura" />
-        <activity android:name=".Activities.Main_Activity" />
-        <activity android:name=".Activities.Activity_modifica_impostazioni" />
-        <activity android:name=".Activities.Activity_recupera_password" />
-        <activity android:name=".Activities.Activity_visualizza_recensioni" />
-        <activity android:name=".Activities.Activity_registrazione" />
-        <activity android:name=".Activities.Activity_login">
+        <activity android:name=".Activity_mostra_struttura" />
+        <activity android:name=".Main_Activity" />
+        <activity android:name=".Activity_modifica_impostazioni" />
+        <activity android:name=".Activity_recupera_password" />
+        <activity android:name=".Activity_visualizza_recensioni" />
+        <activity android:name=".Activity_registrazione" />
+        <activity android:name=".Activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
