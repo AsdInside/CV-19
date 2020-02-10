@@ -42,6 +42,11 @@ public class Activity_ricerca extends AppCompatActivity {
     }
 
     public void Ricerca_avanzata(View view) {
+        /*ottenere i filtri dagli spinner e metterli negli extra*/
+
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Tipo ricerca","Avanzata");
+        startActivity(Ricerca);
     }
 
     public void click_on_menù(View view) {

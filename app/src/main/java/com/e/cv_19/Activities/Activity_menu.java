@@ -35,7 +35,7 @@ public class Activity_menu extends AppCompatActivity {
 
     public void click_on_recensioni(View view) {
         Intent intent_recensioni = new Intent(this,Activity_visualizza_recensioni.class);
-        intent_recensioni.putExtra("Id_utente",current_user.getDisplayName());
+        intent_recensioni.putExtra("Id_utente",current_user.getUid());
         startActivity(intent_recensioni);
     }
 

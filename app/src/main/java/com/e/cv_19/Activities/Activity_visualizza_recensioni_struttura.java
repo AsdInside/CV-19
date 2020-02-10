@@ -28,17 +28,30 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
     }
 
     public void click_on_ristoranti(View view) {
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Tipo Struttura","Ris");
+        Ricerca.putExtra("Tipo ricerca","Category button");
+        startActivity(Ricerca);
     }
 
     public void click_on_località_turistiche(View view) {
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Tipo Struttura","Tur");
+        Ricerca.putExtra("Tipo ricerca","Category button");
+        startActivity(Ricerca);
     }
 
     public void click_on_hotel(View view) {
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Tipo Struttura","Hot");
+        Ricerca.putExtra("Tipo ricerca","Category button");
+        startActivity(Ricerca);
     }
 
     public void Ricerca(View view) {
         Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
         Ricerca.putExtra("Nome Struttura",campo_ricerca.getText());
+        Ricerca.putExtra("Tipo ricerca","Per nome");
         startActivity(Ricerca);
     }
 
