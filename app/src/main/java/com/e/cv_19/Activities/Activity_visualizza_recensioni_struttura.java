@@ -37,6 +37,9 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
     }
 
     public void Ricerca(View view) {
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Nome Struttura",campo_ricerca.getText());
+        startActivity(Ricerca);
     }
 
     public void click_on_filtra(View view) {

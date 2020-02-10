@@ -3,7 +3,6 @@ package com.e.cv_19.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,38 +13,43 @@ import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.squareup.picasso.Picasso;
 
-public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensioni, StruttureAdapter.NoteHolder>{
+
+public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensioni, RecensioniStrutturaAdapter.NoteHolder>{
 
     private  OnItemClickListner listner;
+
     public RecensioniStrutturaAdapter(@NonNull FirestoreRecyclerOptions<Recensioni> options) {
         super(options);
     }
 
 
     @Override
-    protected void onBindViewHolder(@NonNull StruttureAdapter.NoteHolder noteHolder, int i, @NonNull Recensioni recensioni) {
-
+    protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Recensioni recensioni) {
+        noteHolder.Nickname.setText(recensioni.getNickname());
+        noteHolder.Testo.setText(recensioni.getTesto());
+        noteHolder.Valutazione.setText(recensioni.getValutazione());
     }
 
     @NonNull
     @Override
-    public StruttureAdapter.NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.riga_lista_recensioni_struttura,
+                parent, false);
+        return new NoteHolder(v);
     }
 
     class NoteHolder extends RecyclerView.ViewHolder {
-        TextView textViewName;
-        ImageView imageV;
-        TextView textValutazione;
+        TextView Nickname;
+        TextView Testo;
+        TextView Valutazione;
 
 
         public NoteHolder(View itemView) {
             super(itemView);
-            textViewName = itemView.findViewById(R.id.textViewNomeStruttura);
-            imageV=itemView.findViewById(R.id.imageViewStruttura);
-            textValutazione=itemView.findViewById(R.id.textViewValutazione);
+            Nickname = itemView.findViewById(R.id.textViewNickname);
+            Testo=itemView.findViewById(R.id.textViewTestoRecensione);
+            Valutazione=itemView.findViewById(R.id.textViewValutazione);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

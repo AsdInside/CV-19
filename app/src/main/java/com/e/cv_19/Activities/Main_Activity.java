@@ -28,6 +28,7 @@ public class Main_Activity extends AppCompatActivity {
     private CollectionReference notebookRef = db.collection("Strutture");
     private StruttureAdapter adapter;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,30 +69,45 @@ public class Main_Activity extends AppCompatActivity {
 
 
     public void Ricerca(View view) {
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Nome Struttura",campo_ricerca.getText());
+        startActivity(Ricerca);
     }
 
+
     public void click_on_map(View view) {
+        Intent Mappa = new Intent(this,Activity_visualizza_mappa.class);
+        startActivity(Mappa);
     }
 
     public void click_on_località_turistiche(View view) {
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Tipo Struttura","Tur");
+        startActivity(Ricerca);
     }
 
 
 
     public void click_on_hotel(View view) {
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Tipo Struttura","Hot");
+        startActivity(Ricerca);
     }
 
     public void click_on_ristoranti(View view) {
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Tipo Struttura","Ris");
+        startActivity(Ricerca);
     }
     private void setUpRecyclerView() {
         Query ordinamento = notebookRef.orderBy("valutazione",Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Strutture> options = new FirestoreRecyclerOptions.Builder<Strutture>().setQuery(ordinamento,Strutture.class).build();
         adapter = new StruttureAdapter(options);
 
-        RecyclerView recyclerView = findViewById(R.id.Strutture);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+
+        lista_strutture.setHasFixedSize(true);
+        lista_strutture.setLayoutManager(new LinearLayoutManager(this));
+        lista_strutture.setAdapter(adapter);
     }
 
     public void click_on_menù(View view) {

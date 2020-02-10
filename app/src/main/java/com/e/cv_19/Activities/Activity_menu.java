@@ -7,8 +7,13 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.e.cv_19.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Activity_menu extends AppCompatActivity {
+
+    private FirebaseAuth data_info = FirebaseAuth.getInstance();
+    private FirebaseUser current_user = data_info.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +22,10 @@ public class Activity_menu extends AppCompatActivity {
     }
 
     public void click_on_logout(View view) {
+        Intent login =new Intent(this,Activity_login.class);
+        FirebaseAuth.getInstance().signOut();
+        finish();
+        startActivity(login);
     }
 
     public void click_on_ricerca(View view) {
@@ -26,6 +35,7 @@ public class Activity_menu extends AppCompatActivity {
 
     public void click_on_recensioni(View view) {
         Intent intent_recensioni = new Intent(this,Activity_visualizza_recensioni.class);
+        intent_recensioni.putExtra("Id_utente",current_user.getDisplayName());
         startActivity(intent_recensioni);
     }
 
