@@ -8,13 +8,25 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.e.cv_19.Adapter.RecensioniStrutturaAdapter;
+import com.e.cv_19.Model.Recensioni;
 import com.e.cv_19.R;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
 public class Activity_visualizza_recensioni_struttura extends AppCompatActivity {
 
     private Spinner filtro_voto;
     private EditText campo_ricerca;
-    private ListView lista_recensioni;
+    private RecyclerView lista_recensioni;
+    private RecensioniStrutturaAdapter adapter;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference notebookRef = db.collection("Recensioni");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +36,19 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         filtro_voto = findViewById(R.id.spinnerVoto);
         campo_ricerca = findViewById(R.id.campo_ricerca);
         lista_recensioni = findViewById(R.id.ListaRecensioni);
+        configurazione_lista_recensioni();
 
+    }
+
+    private void configurazione_lista_recensioni() {
+        Query ordinamento = notebookRef.orderBy("valutazione", Query.Direction.DESCENDING);
+        FirestoreRecyclerOptions<Recensioni> options = new FirestoreRecyclerOptions.Builder<Recensioni>().setQuery(ordinamento,Recensioni.class).build();
+        adapter = new RecensioniStrutturaAdapter(options);
+
+
+        lista_recensioni.setHasFixedSize(true);
+        lista_recensioni.setLayoutManager(new LinearLayoutManager(this));
+        lista_recensioni.setAdapter(adapter);
     }
 
     public void click_on_ristoranti(View view) {

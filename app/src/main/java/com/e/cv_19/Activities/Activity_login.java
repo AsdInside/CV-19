@@ -111,25 +111,22 @@ public class Activity_login extends AppCompatActivity {
 
     }
     public void Registrati_is_clicked(View view) {
-        Intent exp_int = new Intent(this,Activity_registrazione.class);
-        startActivity(exp_int);
+        Intent Intent_registrazione = new Intent(this,Activity_registrazione.class);
+        startActivity(Intent_registrazione);
     }
 
     public void Recupera_is_clicked(View view) {
-        Intent exp_int = new Intent(this,Activity_recupera_password.class);
-        startActivity(exp_int);
+        Intent Intent_recupera = new Intent(this,Activity_recupera_password.class);
+        startActivity(Intent_recupera);
     }
 
 
     private boolean isValidPassword(String password) {
-        String confermapassword=campo_password.getText().toString();
-        return confermapassword.equals(password) && password.length()>5;
+        String conferma_password=campo_password.getText().toString();
+        return conferma_password.equals(password) && password.length()>5;
 
     }
 
-    private boolean isValidMail(String email){
-
-        return email.contains("@");
-    }
+    private boolean isValidMail(String email){ return email.contains("@"); }
 
 }

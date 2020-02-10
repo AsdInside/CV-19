@@ -1,5 +1,6 @@
 package com.e.cv_19.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -29,12 +30,21 @@ public class Activity_mostra_struttura extends AppCompatActivity {
     }
 
     public void pubblica_recensione(View view) {
+        String testo = testo_recensione.getText().toString();
+        /*estrarre il voto dallo spinner*/
+
     }
 
     public void Ricerca(View view) {
+        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Nome Struttura",campo_ricerca.getText());
+        Ricerca.putExtra("Tipo ricerca","Per nome");
+        startActivity(Ricerca);
     }
 
 
     public void click_on_menù(View view) {
+        Intent menù = new Intent(this ,Activity_menu.class);
+        startActivity(menù);
     }
 }
