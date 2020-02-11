@@ -115,7 +115,7 @@
             app:srcCompat="@android:drawable/stat_notify_sync" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewNomeStruttura"
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:layout_gravity="center|fill"

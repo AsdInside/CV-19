@@ -45,9 +45,8 @@ public class Main_Activity extends AppCompatActivity {
         adapter.setOnItemClickListner(new StruttureAdapter.OnItemClickListner() {
             @Override
             public void onItemClick(DocumentSnapshot docSnapshot, int position) {
-                Strutture s=docSnapshot.toObject(Strutture.class);
-                String id=docSnapshot.getId();
-                gotoPage(s,id);
+                String id_struttura = docSnapshot.getId();
+                gotoPage(id_struttura);
             }
         });
 
@@ -63,11 +62,13 @@ public class Main_Activity extends AppCompatActivity {
         adapter.stopListening();
     }
 
-    private void gotoPage(Strutture s, String id) {
-    //TODO metodo da implementare
+    private void gotoPage(String id_struttura) {
+        Intent mostra_struttura = new Intent(this, Activity_mostra_struttura.class);
+        mostra_struttura.putExtra("id",id_struttura);
+        startActivity(mostra_struttura);
     }
 
-    //Recupero dati dal db
+
 
 
     public void Ricerca(View view) {
@@ -90,7 +91,7 @@ public class Main_Activity extends AppCompatActivity {
 
     public void click_on_località_turistiche(View view) {
         Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Tipo Struttura","Tur");
+        Ricerca.putExtra("Tipo Struttura","tur");
         Ricerca.putExtra("Tipo ricerca","Category button");
         startActivity(Ricerca);
     }
@@ -99,14 +100,14 @@ public class Main_Activity extends AppCompatActivity {
 
     public void click_on_hotel(View view) {
         Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Tipo Struttura","Hot");
+        Ricerca.putExtra("Tipo Struttura","hot");
         Ricerca.putExtra("Tipo ricerca","Category button");
         startActivity(Ricerca);
     }
 
     public void click_on_ristoranti(View view) {
         Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Tipo Struttura","Ris");
+        Ricerca.putExtra("Tipo Struttura","ris");
         Ricerca.putExtra("Tipo ricerca","Category button");
         startActivity(Ricerca);
     }
