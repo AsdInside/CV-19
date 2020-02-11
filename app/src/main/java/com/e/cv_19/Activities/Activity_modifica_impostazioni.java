@@ -27,7 +27,7 @@ public class Activity_modifica_impostazioni extends AppCompatActivity {
     private EditText campo_vecchia_password;
     private EditText campo_nuova_password;
     private EditText campo_ripeti_password;
-    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

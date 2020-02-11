@@ -2,8 +2,10 @@ package com.e.cv_19.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -69,10 +71,15 @@ public class Main_Activity extends AppCompatActivity {
 
 
     public void Ricerca(View view) {
-        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Nome Struttura",campo_ricerca.getText());
-        Ricerca.putExtra("Tipo ricerca","Per nome");
-        startActivity(Ricerca);
+        if(!TextUtils.isEmpty(campo_ricerca.getText())){
+            Intent Ricerca = new Intent(this, Activity_risultati_ricerca.class);
+            Ricerca.putExtra("Nome Struttura", campo_ricerca.getText());
+            Ricerca.putExtra("Tipo ricerca", "Per nome");
+            startActivity(Ricerca);
+        }else{
+            Toast.makeText(this, "Inserire il nome di una struttura",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
 

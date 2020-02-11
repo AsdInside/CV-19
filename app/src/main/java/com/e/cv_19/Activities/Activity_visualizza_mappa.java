@@ -20,11 +20,22 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Map;
+
 public class Activity_visualizza_mappa extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private LocationManager gestore_posizione_utente;
     private LocationListener aggiornamento_posizione_utente;
+    private FirebaseFirestore database = FirebaseFirestore.getInstance();
+    private CollectionReference Strutture = database.collection("Strutture");
 
 
     //Verifica che l'utente accetti la richiesta da parte del dispositivo di conoscere la sua posizione attuale
@@ -35,8 +46,12 @@ public class Activity_visualizza_mappa extends FragmentActivity implements OnMap
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 gestore_posizione_utente.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 0, aggiornamento_posizione_utente);
+            }else{
+                finish();
             }
 
+        }else{
+            finish();
         }
     }
 
@@ -74,9 +89,10 @@ public class Activity_visualizza_mappa extends FragmentActivity implements OnMap
             public void onLocationChanged(Location location) {
 
                 LatLng posizione_attuale_utente = new LatLng(location.getLatitude(),location.getLongitude());
-
+                mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(posizione_attuale_utente).title("Tu"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(posizione_attuale_utente));
+                Inserimento_marker_strutture();
 
             }
 
@@ -98,17 +114,41 @@ public class Activity_visualizza_mappa extends FragmentActivity implements OnMap
 
         //Il dispositivo controlla di avere già ,o meno, i permessi per conoscere la posizione attuale dell'utente
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},0);
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
         }else{
-            gestore_posizione_utente.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 0, aggiornamento_posizione_utente);
+            gestore_posizione_utente.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, aggiornamento_posizione_utente);
 
             Location ultima_posizione_utente = gestore_posizione_utente.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            LatLng coordinate_ultima_posizione = new LatLng(ultima_posizione_utente.getLatitude(),ultima_posizione_utente.getLongitude());
-
-            mMap.addMarker(new MarkerOptions().position(coordinate_ultima_posizione).title("Tu"));
+            LatLng coordinate_ultima_posizione = null;
+            if (ultima_posizione_utente != null) {
+                coordinate_ultima_posizione = new LatLng(ultima_posizione_utente.getLatitude(),ultima_posizione_utente.getLongitude());
+            }else{
+                coordinate_ultima_posizione = new LatLng(40.838599,14.187656);
+            }
+            mMap.clear();
+            mMap.addMarker(new MarkerOptions().position(coordinate_ultima_posizione).title("MSA"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate_ultima_posizione));
+            Inserimento_marker_strutture();
         }
 
 
+    }
+
+    private void Inserimento_marker_strutture() {
+        Strutture.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot Struttura : task.getResult()){
+                        Map<String,Object> dati = Struttura.getData();
+                        Double lat = (Double) dati.get("latitudine");
+                        Double lng = (Double) dati.get("longitudine");
+                        String nome = (String) dati.get("nome");
+                        LatLng coordinate_posizione_struttura = new LatLng(lat.doubleValue(),lng.doubleValue());;
+                        mMap.addMarker(new MarkerOptions().position(coordinate_posizione_struttura).title(nome));
+                    }
+                }
+            }
+        });
     }
 }

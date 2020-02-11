@@ -54,4 +54,30 @@
     <string name="ricerca_avanzata">Ricerca Avanzata</string>
     <string name="menu">Menù</string>
     <string name="logout">Logout</string>
+
+
+    <string-array name="Città">
+        <item/>
+        <item>Napoli</item>
+        <item>Roma</item>
+        <item>Caserta</item>
+    </string-array>
+
+    <string-array name="Categoria">
+        <item/>
+        <item>Ristorante</item>
+        <item>Hotel</item>
+        <item>Località turistica</item>
+    </string-array>
+
+    <string-array name="Recensioni">
+        <item/>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+
 </resources>
