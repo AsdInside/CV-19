@@ -46,17 +46,17 @@ public class Activity_modifica_impostazioni extends AppCompatActivity {
     public void Conferma_is_clicked(View view) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         WriteBatch batch=db.batch();
-        String vecchia_password = campo_vecchia_password.getText().toString();
-        if(!TextUtils.isEmpty(vecchia_password)){
-            final String nouva_password = campo_nuova_password.getText().toString();
-            if(!TextUtils.isEmpty(nouva_password)){
-                String ripeti_password = campo_ripeti_password.getText().toString();
-                if(!TextUtils.isEmpty(ripeti_password)){
-                    if(ripeti_password.equals(nouva_password)){
+        String tmp=campo_vecchia_password.getText().toString();
+        if(!TextUtils.isEmpty(tmp)){
+            String tmp2=campo_nuova_password.getText().toString();
+            if(!TextUtils.isEmpty(tmp2)){
+                String tmp3=campo_ripeti_password.getText().toString();
+                if(!TextUtils.isEmpty(tmp3)){
+                    if(tmp3.equals(tmp2)){
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                         AuthCredential credential = EmailAuthProvider
-                                .getCredential(user.getEmail(), vecchia_password);
+                                .getCredential(user.getEmail(), tmp);
 
                         user.reauthenticate(credential)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -64,7 +64,8 @@ public class Activity_modifica_impostazioni extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                            user.updatePassword(nouva_password).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            String tmp2=campo_nuova_password.getText().toString();
+                                            user.updatePassword(tmp2).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
@@ -97,7 +98,9 @@ public class Activity_modifica_impostazioni extends AppCompatActivity {
     }
 
     public void Invia_richiesta_cancellazione_is_clicked(View view) {
-        Intent richiesta_cancellazione = new Intent(this,Activity_richiesta_cancellazione.class);
-        startActivity(richiesta_cancellazione);
+
+        Intent cancellazione = new Intent(this,Activity_richiesta_cancellazione.class);
+
+        startActivity(cancellazione);
     }
 }

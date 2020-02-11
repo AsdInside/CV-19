@@ -35,11 +35,15 @@ public class Activity_login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         campo_email = findViewById(R.id.Editviewemail);
         campo_password = findViewById(R.id.editTextpassword);
-
+       updateUI();
     }
+
+
     @Override
     public void onStart() {
         super.onStart();
+
+
 
     }
 

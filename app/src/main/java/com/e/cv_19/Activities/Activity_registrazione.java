@@ -11,13 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.e.cv_19.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -30,13 +28,14 @@ public class Activity_registrazione extends AppCompatActivity {
     private EditText campo_password;
     private EditText campo_ripeti_password;
     private FirebaseAuth mAuth;
-    private final String TAG="Register Activity";
+    private final String TAG = "Register Activity";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-       // updateUI(currentUser);
+        // updateUI(currentUser);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class Activity_registrazione extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrazione);
         mAuth = FirebaseAuth.getInstance();
-        campo_nickname=findViewById(R.id.editTextNickname);
+        campo_nickname = findViewById(R.id.editTextNickname);
         campo_nome = findViewById(R.id.editTextNome);
         campo_cognome = findViewById(R.id.editTextCognome);
         campo_email = findViewById(R.id.editTextEmail);
@@ -53,10 +52,10 @@ public class Activity_registrazione extends AppCompatActivity {
     }
 
 
-    private void createUser(String email, String password){
-        final String nome=campo_nome.getText().toString();
-        final  String cognome=campo_cognome.getText().toString();
-        final String nickname=campo_nickname.getText().toString();
+    private void createUser(String email, String password) {
+        final String nome = campo_nome.getText().toString();
+        final String cognome = campo_cognome.getText().toString();
+        final String nickname = campo_nickname.getText().toString();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -66,7 +65,7 @@ public class Activity_registrazione extends AppCompatActivity {
                             Toast.makeText(Activity_registrazione.this, "Registrazione avvenuta con successo",
                                     Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            addFirestore(nickname,nome,cognome);
+                            addFirestore(nickname, nome, cognome);
                             finish();
 
                         } else {
@@ -85,10 +84,9 @@ public class Activity_registrazione extends AppCompatActivity {
     }
 
 
-
     public void Conferma_is_clicked(View view) {
         //validazione dati utente
-        String nickname=campo_nickname.getText().toString();
+        String nickname = campo_nickname.getText().toString();
         String nome = campo_nome.getText().toString();
         String cognome = campo_cognome.getText().toString();
         String email = campo_email.getText().toString();
@@ -99,14 +97,14 @@ public class Activity_registrazione extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Inserire nickname", Toast.LENGTH_SHORT).show();
         else if (!isValidName(nome)) {
             Toast.makeText(getApplicationContext(), "Inserire nome", Toast.LENGTH_SHORT).show();
-        }else if (!isValidName(cognome)) {
+        } else if (!isValidName(cognome)) {
             Toast.makeText(getApplicationContext(), "Inserire cognome", Toast.LENGTH_SHORT).show();
-        }else if (!isValidMail(email)) {
+        } else if (!isValidMail(email)) {
             Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_SHORT).show();
-        } else if (!isValidPassword(password,ripeti_password)) {
+        } else if (!isValidPassword(password, ripeti_password)) {
             Toast.makeText(getApplicationContext(), "Password non coincidente o inferiore a 5 caratteri", Toast.LENGTH_SHORT).show();
         } else {
-            createUser(email,password);
+            createUser(email, password);
         }
     }
 
@@ -120,17 +118,16 @@ public class Activity_registrazione extends AppCompatActivity {
     }
 
 
-    private boolean isValidMail(String email){
+    private boolean isValidMail(String email) {
         return email.contains("@");
     }
 
 
-
-    private boolean isValidPassword(String password,String ripeti_password){
-        return password.equals(ripeti_password) && password.length()>4;
+    private boolean isValidPassword(String password, String ripeti_password) {
+        return password.equals(ripeti_password) && password.length() > 4;
     }
 
-    public void addFirestore(String nickname,String nome, String cognome){
+    public void addFirestore(String nickname, String nome, String cognome) {
 
         FirebaseUser userZ = mAuth.getCurrentUser();
 
@@ -139,25 +136,18 @@ public class Activity_registrazione extends AppCompatActivity {
         user.put("nome", nome);
         user.put("cognome", cognome);
         user.put("nickname", nickname);
-        user.put("idUtente",userZ.getUid());
+        user.put("idUtente", userZ.getUid());
 
 
         // Add a new document with a generated ID
-        db.collection("Utenti")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        db.collection("Utenti").document(userZ.getUid()).set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Registrazione", "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Registrazione", "Error adding document", e);
+                    public void onSuccess(Void aVoid) {
+
+                  //      Toast.makeText(this,"Registrazione avvenuta con successo").show();
                     }
                 });
 
     }
-
 }

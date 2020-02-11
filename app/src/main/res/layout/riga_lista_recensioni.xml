@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/imageViewStruttura"
-            android:layout_width="289dp"
-            android:layout_height="71dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/immagine_struttura"
             android:paddingLeft="5dp"
@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/textViewRecensione"
         android:layout_width="match_parent"
-        android:layout_height="82dp"
+        android:layout_height="wrap_content"
         android:padding="5dp"
         android:paddingLeft="5dp"
         android:paddingTop="8dp"
