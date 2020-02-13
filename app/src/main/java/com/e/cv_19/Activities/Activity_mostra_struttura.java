@@ -89,7 +89,7 @@ public class Activity_mostra_struttura extends AppCompatActivity {
 
     public void Visualizza_recensioni_struttura(View view) {
         Intent Recensioni_struttura = new Intent(this,Activity_visualizza_recensioni_struttura.class);
-        Recensioni_struttura.putExtra("nome",nome_struttura.getText());
+        Recensioni_struttura.putExtra("id",id_struttura);
         startActivity(Recensioni_struttura);
     }
 
@@ -113,7 +113,7 @@ public class Activity_mostra_struttura extends AppCompatActivity {
             nuova_recensione.put("testo",testo);
             nuova_recensione.put("voto",Integer.parseInt(voto));
             nuova_recensione.put("idAutore",user_id);
-            nuova_recensione.put("struttura",nome_struttura.getText());
+            nuova_recensione.put("struttura",id_struttura);
 
 
 

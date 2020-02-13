@@ -35,7 +35,7 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
     private RecyclerView lista_recensioni;
     private RecensioniStrutturaAdapter adapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String nome_struttura;
+    private String id_struttura;
     private CollectionReference notebookRef = db.collection("Recensione");
 
     @Override
@@ -49,32 +49,26 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         campo_ricerca = findViewById(R.id.campo_ricerca);
         lista_recensioni = findViewById(R.id.ListaRecensioni);
         Bundle dati_ricevuti = getIntent().getExtras();
-        nome_struttura = dati_ricevuti.getString("nome");
+        id_struttura = dati_ricevuti.getString("id");
         configurazione_lista_recensioni();
 
     }
-
+    /*wP7YlJPgwPW0GiUEEptk*/
     private void configurazione_lista_recensioni() {
-        notebookRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(DocumentSnapshot document : task.getResult()){
-                        if(nome_struttura.equals(document.getString("struttura"))){
-                            Log.i("Recensioni",document.getString("struttura") + " " + " " + document.getString("idAutore")
-                                    + " " + " " + document.get("voto").toString() + " " + document.getString("testo"));
-                        }
-
-                    }
-                }else{
-                    Log.d("Recensioni","non esistono recensioni");
-                }
-
-            }
-        });
-        /*
-        Query recensioni = notebookRef.whereEqualTo("struttura",nome_struttura).orderBy("voto");
-        FirestoreRecyclerOptions<Recensioni> options = new FirestoreRecyclerOptions.Builder<Recensioni>().setQuery(recensioni,Recensioni.class).build();
+       notebookRef.orderBy("voto").whereEqualTo("struttura",id_struttura).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+           @Override
+           public void onComplete(@NonNull Task<QuerySnapshot> task) {
+               if(task.isSuccessful()){
+                   for (DocumentSnapshot document : task.getResult()){
+                       Log.i("Recensioni", document.getString("testo") + " " + document.get("idAutore") + " "  + document.get("voto").toString()
+                               + " " + document.getString("struttura")  );
+                   }
+               }else{
+                   Log.d("Recensioni","nessuna recensione");
+               }
+           }
+       });
+        /*FirestoreRecyclerOptions<Recensioni> options = new FirestoreRecyclerOptions.Builder<Recensioni>().setQuery(recensioni,Recensioni.class).build();
         adapter = new RecensioniStrutturaAdapter(options);
 
 
@@ -122,7 +116,7 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
             Toast.makeText(this, "Inserire il filtro dei voti", Toast.LENGTH_SHORT).show();
             return;
         }
-        Query filtro = notebookRef.whereEqualTo("struttura",nome_struttura).whereEqualTo("voto",voto)
+        Query filtro = notebookRef.whereEqualTo("struttura",id_struttura).whereEqualTo("voto",voto)
                 .orderBy("voto", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Recensioni> options = new FirestoreRecyclerOptions.Builder<Recensioni>().setQuery(filtro,Recensioni.class).build();
         adapter = new RecensioniStrutturaAdapter(options);

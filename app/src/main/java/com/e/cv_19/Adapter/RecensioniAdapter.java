@@ -26,8 +26,7 @@ public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensioni, Rece
 
     @Override
     protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Recensioni recensioni) {
-        /*noteHolder.textViewName.setText(recensioni.getStruttura().getNome());
-        Picasso.get().load(recensioni.getStruttura().getImmagine()).into(noteHolder.imageV);*/ //bisogna cercare nel database il document reference della struttura
+
         noteHolder.textValutazione.setText(recensioni.getVoto());
         noteHolder.testo_recensione.setText(recensioni.getTesto());
     }
