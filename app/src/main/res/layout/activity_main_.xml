@@ -60,8 +60,8 @@
 
     <LinearLayout
         android:id="@+id/lista_strutture"
-        android:layout_width="414dp"
-        android:layout_height="268dp"
+        android:layout_width="410dp"
+        android:layout_height="245dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
