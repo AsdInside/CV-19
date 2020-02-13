@@ -40,8 +40,10 @@ public class Activity_mostra_struttura extends AppCompatActivity {
     private ImageView immagine_struttura;
     private Spinner voto_recensione;
     private String id_struttura;
+    private String Nickname;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
 
 
     @Override
@@ -86,6 +88,9 @@ public class Activity_mostra_struttura extends AppCompatActivity {
 
 
     public void Visualizza_recensioni_struttura(View view) {
+        Intent Recensioni_struttura = new Intent(this,Activity_visualizza_recensioni_struttura.class);
+        Recensioni_struttura.putExtra("nome",nome_struttura.getText());
+        startActivity(Recensioni_struttura);
     }
 
     public void pubblica_recensione(View view) {
@@ -93,14 +98,23 @@ public class Activity_mostra_struttura extends AppCompatActivity {
         String voto = voto_recensione.getSelectedItem().toString();
         if(IsValidText(testo) && IsValidRank(voto)){
 
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            String usid= currentUser.getUid();
+            String user_id = mAuth.getCurrentUser().getUid();
+            final DocumentReference datiutente = database.collection("Utenti").document(user_id);
+
+            if(user_id.length() == 0){
+                Toast.makeText(this, "IdAutore non trovato", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+
 
             Map<String,Object> nuova_recensione = new HashMap<>();
             nuova_recensione.put("testo",testo);
-            nuova_recensione.put("voto",voto);
-            nuova_recensione.put("idcliente",usid);
-            nuova_recensione.put("struttura",id_struttura);
+            nuova_recensione.put("voto",Integer.parseInt(voto));
+            nuova_recensione.put("idAutore",user_id);
+            nuova_recensione.put("struttura",nome_struttura.getText());
+
 
 
 
@@ -122,6 +136,8 @@ public class Activity_mostra_struttura extends AppCompatActivity {
         }
 
     }
+
+
 
     private boolean IsValidRank(String voto) {
         if(voto.length() == 0){

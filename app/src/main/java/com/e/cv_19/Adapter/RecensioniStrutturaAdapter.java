@@ -12,7 +12,11 @@ import com.e.cv_19.Model.Recensioni;
 import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensioni, RecensioniStrutturaAdapter.NoteHolder>{
@@ -26,9 +30,27 @@ public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensi
 
     @Override
     protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Recensioni recensioni) {
-        noteHolder.Nickname.setText(recensioni.getNickname());
+        Nickname(noteHolder.Nickname,recensioni.getIdAutore());
         noteHolder.Testo.setText(recensioni.getTesto());
-        noteHolder.Valutazione.setText(recensioni.getValutazione());
+        noteHolder.Valutazione.setText(recensioni.getVoto());
+    }
+
+    private void Nickname(final TextView Nick, String usid) {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        final DocumentReference datiStruttura = database.collection("Utenti").document(usid);
+
+        datiStruttura.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                       Nick.setText(document.getString("nickname"));
+                    }
+
+                }
+            }
+        });
     }
 
     @NonNull
