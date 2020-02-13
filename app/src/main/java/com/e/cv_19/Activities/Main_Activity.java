@@ -117,7 +117,7 @@ public class Main_Activity extends AppCompatActivity {
         adapter = new StruttureAdapter(options);
 
 
-        lista_strutture.setHasFixedSize(true);
+        lista_strutture.setHasFixedSize(false);
         lista_strutture.setLayoutManager(new LinearLayoutManager(this));
         lista_strutture.setAdapter(adapter);
     }

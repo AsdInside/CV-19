@@ -2,7 +2,6 @@ package com.e.cv_19.Activities;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +20,8 @@ public class Activity_visualizza_recensioni extends AppCompatActivity {
     private RecyclerView lista_recensioni;
     private RecensioniAdapter adapter;
     private FirebaseFirestore Database = FirebaseFirestore.getInstance();
-    private CollectionReference Recensioni = Database.collection("Recensioni");
+    private CollectionReference Recensioni = Database.collection("Recensione");
+
 
 
     @Override
