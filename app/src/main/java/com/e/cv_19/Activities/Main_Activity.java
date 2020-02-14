@@ -51,6 +51,8 @@ public class Main_Activity extends AppCompatActivity {
         });
 
     }
+
+
     protected void onStart(){
         super.onStart();
         adapter.startListening();

@@ -1,14 +1,14 @@
 package com.e.cv_19.Model;
 
-public class Recensioni {
+public class Recensione {
     private String idAutore;
     private String struttura;
     private String testo;
     private int voto;
 
-    public Recensioni(){}
+    public Recensione(){}
 
-    public  Recensioni(String autore,String recensita,String testo,int val){
+    public  Recensione(String autore,String recensita,String testo,int val){
         this.idAutore = autore;
         this.struttura = recensita;
         this.testo = testo;
