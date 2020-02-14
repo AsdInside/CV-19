@@ -99,15 +99,11 @@ public class Activity_mostra_struttura extends AppCompatActivity {
         if(IsValidText(testo) && IsValidRank(voto)){
 
             String user_id = mAuth.getCurrentUser().getUid();
-            final DocumentReference datiutente = database.collection("Utenti").document(user_id);
 
             if(user_id.length() == 0){
                 Toast.makeText(this, "IdAutore non trovato", Toast.LENGTH_SHORT).show();
                 return;
             }
-
-
-
 
             Map<String,Object> nuova_recensione = new HashMap<>();
             nuova_recensione.put("testo",testo);

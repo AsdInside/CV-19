@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.e.cv_19.Model.Recensioni;
+import com.e.cv_19.Model.Recensione;
 import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -19,20 +19,20 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensioni, RecensioniStrutturaAdapter.NoteHolder>{
+public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensione, RecensioniStrutturaAdapter.NoteHolder>{
 
     private  OnItemClickListner listner;
 
-    public RecensioniStrutturaAdapter(@NonNull FirestoreRecyclerOptions<Recensioni> options) {
+    public RecensioniStrutturaAdapter(@NonNull FirestoreRecyclerOptions<Recensione> options) {
         super(options);
     }
 
 
     @Override
-    protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Recensioni recensioni) {
+    protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Recensione recensioni) {
         Nickname(noteHolder.Nickname,recensioni.getIdAutore());
         noteHolder.Testo.setText(recensioni.getTesto());
-        noteHolder.Valutazione.setText(recensioni.getVoto());
+        noteHolder.Valutazione.setText(String.valueOf(recensioni.getVoto()));
     }
 
     private void Nickname(final TextView Nick, String usid) {
@@ -53,8 +53,7 @@ public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensi
         });
     }
 
-    @NonNull
-    @Override
+
     public NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.riga_lista_recensioni_struttura,
                 parent, false);

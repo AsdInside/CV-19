@@ -52,6 +52,32 @@ public class Activity_risultati_ricerca extends AppCompatActivity {
 
         }
 
+        adapter.setOnItemClickListner(new StruttureAdapter.OnItemClickListner() {
+            @Override
+            public void onItemClick(DocumentSnapshot docSnapshot, int position) {
+                String id_struttura = docSnapshot.getId();
+                gotoPage(id_struttura);
+            }
+        });
+
+    }
+
+    private void gotoPage(String id_struttura) {
+        Intent mostra_struttura = new Intent(this, Activity_mostra_struttura.class);
+        mostra_struttura.putExtra("id",id_struttura);
+        startActivity(mostra_struttura);
+    }
+
+
+    protected void onStart(){
+        super.onStart();
+        adapter.startListening();
+    }
+
+    protected void onStop(){
+
+        super.onStop();
+        adapter.stopListening();
     }
 
     public void click_on_indietro(View view) {
@@ -72,27 +98,15 @@ public class Activity_risultati_ricerca extends AppCompatActivity {
     }
 
     public void effettua_ricerca_per_categoria(String categoria){
-        notebookRef.whereEqualTo("tipologia",categoria).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-           @Override
-           public void onComplete(@NonNull Task<QuerySnapshot> task) {
-               if(task.isSuccessful()){
-                   for (DocumentSnapshot document : task.getResult()){
-                       Log.i("Strutture", document.getString("nome") + " " + document.get("indirizzo") + " "  + document.get("valutazione").toString());
-                   }
-               }else{
-                   Log.d("Strutture","nessuna struttura");
-               }
-           }
-       });
 
-        /*Query strutture = notebookRef.whereEqualTo("tipologia",categoria);
+        Query strutture = notebookRef.whereEqualTo("tipologia",categoria);
         FirestoreRecyclerOptions<Strutture> options = new FirestoreRecyclerOptions.Builder<Strutture>().setQuery(strutture,Strutture.class).build();
         adapter = new StruttureAdapter(options);
 
 
         risultati_ricerca.setHasFixedSize(true);
         risultati_ricerca.setLayoutManager(new LinearLayoutManager(this));
-        risultati_ricerca.setAdapter(adapter);*/
+        risultati_ricerca.setAdapter(adapter);
 
     }
 

@@ -24,13 +24,13 @@ public class StruttureAdapter extends FirestoreRecyclerAdapter<Strutture, Strutt
         super(options);
     }
 
-        @Override
-        protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Strutture strutture) {
-            noteHolder.textViewName.setText(strutture.getNome());
-            Picasso.get().load(strutture.getImmagine()).into(noteHolder.imageV);
-            String valutazione= Double.toString(strutture.getValutazione());
-            noteHolder.textValutazione.setText(valutazione);
-        }
+    @Override
+    protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Strutture strutture) {
+        noteHolder.textViewName.setText(strutture.getNome());
+        Picasso.get().load(strutture.getImmagine()).into(noteHolder.imageV);
+        String valutazione= Double.toString(strutture.getValutazione());
+        noteHolder.textValutazione.setText(valutazione);
+    }
 
 
 

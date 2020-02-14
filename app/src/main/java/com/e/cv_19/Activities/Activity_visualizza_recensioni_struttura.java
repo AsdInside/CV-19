@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.e.cv_19.Adapter.RecensioniStrutturaAdapter;
-import com.e.cv_19.Model.Recensioni;
+import com.e.cv_19.Model.Recensione;
 import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,18 +50,24 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         Bundle dati_ricevuti = getIntent().getExtras();
         id_struttura = dati_ricevuti.getString("id");
         configurazione_lista_recensioni();
-        adapter.setOnItemClickListner(new RecensioniStrutturaAdapter.OnItemClickListner() {
-            @Override
-            public void onItemClick(DocumentSnapshot docSnapshot, int position) {
 
-            }
-        });
+    }
 
+    protected void onStart(){
+        super.onStart();
+        adapter.startListening();
+    }
+
+    protected void onStop(){
+
+        super.onStop();
+        adapter.stopListening();
     }
 
 
     private void configurazione_lista_recensioni() {
-        /*notebookRef.whereEqualTo("struttura",id_struttura).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Query recensioni = notebookRef.whereEqualTo("struttura",id_struttura);
+        recensioni.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
            @Override
            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                if(task.isSuccessful()){
@@ -73,10 +79,10 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
                    Log.d("Recensioni","nessuna recensione");
                }
            }
-       });*/
+       });
 
-        Query recensioni = notebookRef.whereEqualTo("struttura",id_struttura);
-        FirestoreRecyclerOptions<Recensioni> options = new FirestoreRecyclerOptions.Builder<Recensioni>().setQuery(recensioni,Recensioni.class).build();
+
+        FirestoreRecyclerOptions<Recensione> options = new FirestoreRecyclerOptions.Builder<Recensione>().setQuery(recensioni,Recensione.class).build();
         adapter = new RecensioniStrutturaAdapter(options);
 
 
@@ -126,7 +132,7 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         }
         Query filtro = notebookRef.whereEqualTo("struttura",id_struttura).whereEqualTo("voto",voto)
                 .orderBy("voto", Query.Direction.DESCENDING);
-        FirestoreRecyclerOptions<Recensioni> options = new FirestoreRecyclerOptions.Builder<Recensioni>().setQuery(filtro,Recensioni.class).build();
+        FirestoreRecyclerOptions<Recensione> options = new FirestoreRecyclerOptions.Builder<Recensione>().setQuery(filtro,Recensione.class).build();
         adapter = new RecensioniStrutturaAdapter(options);
 
 

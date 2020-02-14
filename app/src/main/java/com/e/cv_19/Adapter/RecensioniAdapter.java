@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.e.cv_19.Model.Recensioni;
+import com.e.cv_19.Model.Recensione;
 import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -20,17 +20,17 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensioni, RecensioniAdapter.NoteHolder>{
+public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensione, RecensioniAdapter.NoteHolder>{
 
     private OnItemClickListner listner;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
 
-    public RecensioniAdapter(@NonNull FirestoreRecyclerOptions<Recensioni> options) {
+    public RecensioniAdapter(@NonNull FirestoreRecyclerOptions<Recensione> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final NoteHolder noteHolder, int i, @NonNull Recensioni recensioni) {
+    protected void onBindViewHolder(@NonNull final NoteHolder noteHolder, int i, @NonNull Recensione recensioni) {
         database.collection("Strutture").document(recensioni.getStruttura()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -44,7 +44,7 @@ public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensioni, Rece
             }
         });
 
-        noteHolder.textValutazione.setText(recensioni.getVoto());
+        noteHolder.textValutazione.setText(String.valueOf(recensioni.getVoto()));
         noteHolder.testo_recensione.setText(recensioni.getTesto());
     }
 
@@ -65,7 +65,7 @@ public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensioni, Rece
 
         public NoteHolder(View itemView) {
             super(itemView);
-            textViewName = itemView.findViewById(R.id.textViewNomeStruttura);
+            textViewName = itemView.findViewById(R.id.textViewStruttura);
             imageV=itemView.findViewById(R.id.imageViewStruttura);
             textValutazione=itemView.findViewById(R.id.textViewValutazione);
             testo_recensione = itemView.findViewById(R.id.textViewRecensione);
