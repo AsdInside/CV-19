@@ -8,9 +8,6 @@
     tools:context=".Activities.Activity_mostra_struttura">
 
 
-
-
-
     <TextView
         android:id="@+id/textViewVoto"
         android:layout_width="wrap_content"
@@ -20,10 +17,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.807" />
+        app:layout_constraintVertical_bias="0.773" />
 
     <Spinner
         android:id="@+id/spinnerVoto"
@@ -37,7 +34,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.804" />
+        app:layout_constraintVertical_bias="0.785" />
 
     <ImageButton
         android:id="@+id/imageButtonMenùLaterale"
@@ -111,7 +108,7 @@
         <ImageView
             android:id="@+id/imageStruttura"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/immagine_struttura"
             android:paddingLeft="5dp"
@@ -134,7 +131,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="56dp">
 
             <TextView
                 android:id="@+id/textViewDescrizione"
@@ -151,11 +148,12 @@
             android:id="@+id/editTextTestoRecensione"
             android:layout_width="match_parent"
             android:layout_height="86dp"
-            android:importantForAutofill="no"
             android:ems="10"
             android:hint="@string/testo_recensione"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
     </LinearLayout>
 
     <Button
@@ -185,4 +183,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.907" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

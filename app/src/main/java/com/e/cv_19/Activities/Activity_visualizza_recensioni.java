@@ -2,7 +2,6 @@ package com.e.cv_19.Activities;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,7 +28,7 @@ public class Activity_visualizza_recensioni extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizza_recensioni);
         Bundle dati_ricevuti = getIntent().getExtras();
-        String utente = dati_ricevuti.getString("id_utente");
+        String utente = dati_ricevuti.getString("idUtente");
 
 
         lista_recensioni = findViewById(R.id.ListaRecensioni);
