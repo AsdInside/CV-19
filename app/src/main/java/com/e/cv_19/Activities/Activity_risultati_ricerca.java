@@ -92,6 +92,17 @@ public class Activity_risultati_ricerca extends AppCompatActivity {
 
 
     public void effettua_ricerca_avanzata(String città,String categoria,String recensioni){
+        Query strutture = notebookRef.whereEqualTo("tipologia",categoria);
+        Query filtro_città = strutture.whereEqualTo("citta",città);
+        Query risultato = filtro_città.whereGreaterThanOrEqualTo("valutazione",recensioni);
+
+        FirestoreRecyclerOptions<Strutture> options = new FirestoreRecyclerOptions.Builder<Strutture>().setQuery(risultato,Strutture.class).build();
+        adapter = new StruttureAdapter(options);
+
+
+        risultati_ricerca.setHasFixedSize(true);
+        risultati_ricerca.setLayoutManager(new LinearLayoutManager(this));
+        risultati_ricerca.setAdapter(adapter);
 
 
 

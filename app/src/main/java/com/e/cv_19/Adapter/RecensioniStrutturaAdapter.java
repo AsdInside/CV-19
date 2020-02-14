@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensione, RecensioniStrutturaAdapter.NoteHolder>{
 
+    FirebaseFirestore database = FirebaseFirestore.getInstance();
     private  OnItemClickListner listner;
 
     public RecensioniStrutturaAdapter(@NonNull FirestoreRecyclerOptions<Recensione> options) {
@@ -29,29 +30,26 @@ public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensi
 
 
     @Override
-    protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Recensione recensioni) {
-        Nickname(noteHolder.Nickname,recensioni.getIdAutore());
-        noteHolder.Testo.setText(recensioni.getTesto());
-        noteHolder.Valutazione.setText(String.valueOf(recensioni.getVoto()));
-    }
+    protected void onBindViewHolder(@NonNull final NoteHolder noteHolder, int i, @NonNull Recensione recensioni) {
+        final DocumentReference dati_Autore = database.collection("Utenti").document(recensioni.getIdAutore());
 
-    private void Nickname(final TextView Nick, String usid) {
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        final DocumentReference datiStruttura = database.collection("Utenti").document(usid);
-
-        datiStruttura.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        dati_Autore.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()){
-                       Nick.setText(document.getString("nickname"));
+                        noteHolder.Nickname.setText(document.getString("nickname"));
                     }
 
                 }
             }
         });
+        noteHolder.Testo.setText(recensioni.getTesto());
+        noteHolder.Valutazione.setText(String.valueOf(recensioni.getVoto()));
     }
+
+
 
 
     public NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

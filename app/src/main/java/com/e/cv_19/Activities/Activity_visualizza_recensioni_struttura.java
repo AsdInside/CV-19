@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -19,22 +20,30 @@ import com.e.cv_19.Adapter.RecensioniStrutturaAdapter;
 import com.e.cv_19.Model.Recensione;
 import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Activity_visualizza_recensioni_struttura extends AppCompatActivity {
 
     private Spinner filtro_voto;
+    private Button segnala;
     private EditText campo_ricerca;
     private RecyclerView lista_recensioni;
     private RecensioniStrutturaAdapter adapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String id_struttura;
+    private Query recensioni;
+    private String idAutore;
+    private String testo;
+    private String recensione_selezionata;
     private CollectionReference notebookRef = db.collection("Recensione");
 
     @Override
@@ -43,6 +52,7 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         setContentView(R.layout.activity_visualizza_recensioni_struttura);
 
         filtro_voto = findViewById(R.id.spinnerVoto);
+        segnala = findViewById(R.id.buttonSegnala);
         ArrayAdapter<CharSequence> adapter_recensioni = ArrayAdapter.createFromResource(this, R.array.Recensioni, android.R.layout.simple_spinner_dropdown_item);
         filtro_voto.setAdapter(adapter_recensioni);
         campo_ricerca = findViewById(R.id.campo_ricerca);
@@ -50,8 +60,20 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         Bundle dati_ricevuti = getIntent().getExtras();
         id_struttura = dati_ricevuti.getString("id");
         configurazione_lista_recensioni();
+        adapter.setOnItemClickListner(new RecensioniStrutturaAdapter.OnItemClickListner() {
+            @Override
+            public void onItemClick(DocumentSnapshot docSnapshot, int position) {
+                idAutore = docSnapshot.getString("idAutore");
+                recensione_selezionata = docSnapshot.getId();
+                if(segnala.getVisibility() != View.VISIBLE){
+                    segnala.setVisibility(View.VISIBLE);
+                }
+                Toast.makeText(getApplicationContext(),"Recensione selezionata",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
+
 
     protected void onStart(){
         super.onStart();
@@ -66,21 +88,7 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
 
 
     private void configurazione_lista_recensioni() {
-        Query recensioni = notebookRef.whereEqualTo("struttura",id_struttura);
-        recensioni.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-           @Override
-           public void onComplete(@NonNull Task<QuerySnapshot> task) {
-               if(task.isSuccessful()){
-                   for (DocumentSnapshot document : task.getResult()){
-                       Log.i("Recensioni", document.getString("testo") + " " + document.get("idAutore") + " "  + document.get("voto").toString()
-                               + " " + document.getString("struttura")  );
-                   }
-               }else{
-                   Log.d("Recensioni","nessuna recensione");
-               }
-           }
-       });
-
+        recensioni = notebookRef.whereEqualTo("struttura",id_struttura);
 
         FirestoreRecyclerOptions<Recensione> options = new FirestoreRecyclerOptions.Builder<Recensione>().setQuery(recensioni,Recensione.class).build();
         adapter = new RecensioniStrutturaAdapter(options);
@@ -130,8 +138,8 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
             Toast.makeText(this, "Inserire il filtro dei voti", Toast.LENGTH_SHORT).show();
             return;
         }
-        Query filtro = notebookRef.whereEqualTo("struttura",id_struttura).whereEqualTo("voto",voto)
-                .orderBy("voto", Query.Direction.DESCENDING);
+        Query filtro = recensioni.whereEqualTo("voto",voto);
+
         FirestoreRecyclerOptions<Recensione> options = new FirestoreRecyclerOptions.Builder<Recensione>().setQuery(filtro,Recensione.class).build();
         adapter = new RecensioniStrutturaAdapter(options);
 
@@ -139,13 +147,67 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         lista_recensioni.setHasFixedSize(true);
         lista_recensioni.setLayoutManager(new LinearLayoutManager(this));
         lista_recensioni.setAdapter(adapter);
+        onStart();
     }
 
 
 
     public void click_on_segnala(View view){
-        //potrebbe essere necessario spostare questo metodo nell'adapter e cambiare il context del
-        //layout riga recensioni struttura
+        final DocumentReference datiutente = db.collection("Utenti").document(idAutore);
+        final DocumentReference recensione = notebookRef.document(recensione_selezionata);
+        getTesto(recensione);
+
+        datiutente.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot){
+                if (documentSnapshot.exists()) {
+                    final Map<String, Object> obj = new HashMap<>();
+                    obj.put("nickname", documentSnapshot.getString("nickname"));
+                    obj.put("struttura", id_struttura);
+                    obj.put("testo",testo);
+                    db.collection("Segnalazioni").add(obj).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(getApplicationContext(), "Segnalazione Inviata", Toast.LENGTH_SHORT).show();
+                            Log.d("Segnalazioni", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Errore", Toast.LENGTH_SHORT).show();
+                            Log.w("Segnalazioni", "Error adding document", e);
+                        }
+                    });
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("Segnalazioni","segnalazione non invitata");
+            }
+        });
+
+
+        segnala.setVisibility(View.GONE);
+        idAutore = null;
+
+    }
+
+    private void getTesto(DocumentReference recensione) {
+        recensione.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    testo = documentSnapshot.getString("testo");
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("testo","testo non trovato");
+            }
+        });
     }
 
     public void click_on_menù(View view) {
