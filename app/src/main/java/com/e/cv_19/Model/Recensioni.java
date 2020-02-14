@@ -2,7 +2,7 @@ package com.e.cv_19.Model;
 
 public class Recensioni {
     private String idAutore;
-    private String  struttura;
+    private String struttura;
     private String testo;
     private int voto;
 

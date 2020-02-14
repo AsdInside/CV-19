@@ -11,13 +11,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ListaRecensioni"
         android:layout_width="match_parent"
-        android:layout_height="644dp" />
+        android:layout_height="580dp" />
 
     <Button
         android:id="@+id/buttonIndietro"
         android:layout_width="146dp"
         android:layout_height="wrap_content"
         android:background="#F5EC07"
+        android:onClick="click_on_indietro"
         android:text="@string/Indietro" />
 
 </LinearLayout>

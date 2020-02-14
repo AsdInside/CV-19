@@ -2,6 +2,7 @@ package com.e.cv_19.Activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +24,6 @@ public class Activity_visualizza_recensioni extends AppCompatActivity {
     private CollectionReference Recensioni = Database.collection("Recensione");
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class Activity_visualizza_recensioni extends AppCompatActivity {
     }
 
     public void Configura_lista_recensioni(String utente){
-        Query recensioni_utente = Recensioni.whereEqualTo("idUtente",utente);
+        Query recensioni_utente = Recensioni.whereEqualTo("idAutore",utente);
         FirestoreRecyclerOptions<Recensioni> options= new FirestoreRecyclerOptions.Builder<Recensioni>()
                 .setQuery(recensioni_utente, Recensioni.class).build();
 

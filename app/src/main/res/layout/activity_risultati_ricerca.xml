@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055"
+        app:layout_constraintVertical_bias="0.023"
         app:srcCompat="@drawable/baseline_reorder_black_24dp" />
 
     <Button
@@ -30,17 +30,16 @@
         android:text="@string/Indietro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.897"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <LinearLayout
         android:id="@+id/Ricerca"
-        android:layout_width="409dp"
-        android:layout_height="643dp"
-        android:layout_marginTop="84dp"
-        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="645dp"
+        android:layout_marginTop="70dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,9 +47,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/Risultati_ricerca"
+            android:id="@+id/strutture_ricercate"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

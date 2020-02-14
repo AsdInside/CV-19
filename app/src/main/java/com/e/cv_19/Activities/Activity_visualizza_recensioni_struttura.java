@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -51,11 +50,18 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         Bundle dati_ricevuti = getIntent().getExtras();
         id_struttura = dati_ricevuti.getString("id");
         configurazione_lista_recensioni();
+        adapter.setOnItemClickListner(new RecensioniStrutturaAdapter.OnItemClickListner() {
+            @Override
+            public void onItemClick(DocumentSnapshot docSnapshot, int position) {
+
+            }
+        });
 
     }
-    /*wP7YlJPgwPW0GiUEEptk*/
+
+
     private void configurazione_lista_recensioni() {
-       notebookRef.orderBy("voto").whereEqualTo("struttura",id_struttura).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        /*notebookRef.whereEqualTo("struttura",id_struttura).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
            @Override
            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                if(task.isSuccessful()){
@@ -67,33 +73,35 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
                    Log.d("Recensioni","nessuna recensione");
                }
            }
-       });
-        /*FirestoreRecyclerOptions<Recensioni> options = new FirestoreRecyclerOptions.Builder<Recensioni>().setQuery(recensioni,Recensioni.class).build();
+       });*/
+
+        Query recensioni = notebookRef.whereEqualTo("struttura",id_struttura);
+        FirestoreRecyclerOptions<Recensioni> options = new FirestoreRecyclerOptions.Builder<Recensioni>().setQuery(recensioni,Recensioni.class).build();
         adapter = new RecensioniStrutturaAdapter(options);
 
 
         lista_recensioni.setHasFixedSize(true);
         lista_recensioni.setLayoutManager(new LinearLayoutManager(this));
-        lista_recensioni.setAdapter(adapter);*/
+        lista_recensioni.setAdapter(adapter);
     }
 
     public void click_on_ristoranti(View view) {
         Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Tipo Struttura","ris");
+        Ricerca.putExtra("Tipo Struttura","Ris");
         Ricerca.putExtra("Tipo ricerca","Category button");
         startActivity(Ricerca);
     }
 
     public void click_on_località_turistiche(View view) {
         Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Tipo Struttura","tur");
+        Ricerca.putExtra("Tipo Struttura","Tur");
         Ricerca.putExtra("Tipo ricerca","Category button");
         startActivity(Ricerca);
     }
 
     public void click_on_hotel(View view) {
         Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Tipo Struttura","hot");
+        Ricerca.putExtra("Tipo Struttura","Hot");
         Ricerca.putExtra("Tipo ricerca","Category button");
         startActivity(Ricerca);
     }
