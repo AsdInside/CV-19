@@ -32,7 +32,7 @@ public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensi
     protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Recensioni recensioni) {
         Nickname(noteHolder.Nickname,recensioni.getIdAutore());
         noteHolder.Testo.setText(recensioni.getTesto());
-        noteHolder.Valutazione.setText(recensioni.getVoto());
+        noteHolder.Valutazione.setText(String.valueOf(recensioni.getVoto()));
     }
 
     private void Nickname(final TextView Nick, String usid) {

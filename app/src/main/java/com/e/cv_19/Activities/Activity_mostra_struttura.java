@@ -21,11 +21,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -43,8 +44,12 @@ public class Activity_mostra_struttura extends AppCompatActivity {
     private String Nickname;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-
+    private CollectionReference Recensioni=database.collection("Recensione");
+    private CollectionReference notebookRef = database.collection("Strutture");
+    private double voti=0;
+    private int count=0;
+    private double totale=0;
+    private double media=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +96,8 @@ public class Activity_mostra_struttura extends AppCompatActivity {
         Intent Recensioni_struttura = new Intent(this,Activity_visualizza_recensioni_struttura.class);
         Recensioni_struttura.putExtra("id",id_struttura);
         startActivity(Recensioni_struttura);
+
+
     }
 
     public void pubblica_recensione(View view) {
@@ -124,6 +131,28 @@ public class Activity_mostra_struttura extends AppCompatActivity {
                         public void onSuccess(DocumentReference documentReference) {
                             Toast.makeText(getApplicationContext(), "Recensione pubblicata", Toast.LENGTH_SHORT).show();
                             Log.d("Recensione", "DocumentSnapshot added with ID: " + documentReference.getId());
+                            database.collection("Recensione").whereEqualTo("struttura",id_struttura)
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.i("Recension", "Tutto ok");
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                                   String voto= String.valueOf(document.get("voto"));
+                                                    voti=Double.parseDouble(voto);
+                                                    totale+=voti;
+                                                    count++;
+
+                                                    media=totale/count;
+
+
+                                                }
+
+                                            }
+                                        }
+                                    });
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -136,6 +165,8 @@ public class Activity_mostra_struttura extends AppCompatActivity {
         }
 
     }
+
+
 
 
 

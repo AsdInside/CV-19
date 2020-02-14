@@ -29,6 +29,7 @@ public class StruttureAdapter extends FirestoreRecyclerAdapter<Strutture, Strutt
             noteHolder.textViewName.setText(strutture.getNome());
             Picasso.get().load(strutture.getImmagine()).into(noteHolder.imageV);
             String valutazione= Double.toString(strutture.getValutazione());
+
             noteHolder.textValutazione.setText(valutazione);
         }
 
