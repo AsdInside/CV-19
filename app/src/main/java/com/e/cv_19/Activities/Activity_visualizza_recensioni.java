@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.e.cv_19.Adapter.RecensioniAdapter;
-import com.e.cv_19.Model.Recensione;
+import com.e.cv_19.Model.Recensioni;
 import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,8 +53,8 @@ public class Activity_visualizza_recensioni extends AppCompatActivity {
     public void Configura_lista_recensioni(){
         FirebaseUser utente = mAuth.getCurrentUser();
         Query recensioni_utente = Recensioni.whereEqualTo("idAutore",utente.getUid());
-        FirestoreRecyclerOptions<Recensione> options= new FirestoreRecyclerOptions.Builder<Recensione>()
-                .setQuery(recensioni_utente, Recensione.class).build();
+        FirestoreRecyclerOptions<Recensioni> options= new FirestoreRecyclerOptions.Builder<Recensioni>()
+                .setQuery(recensioni_utente, Recensioni.class).build();
 
         adapter = new RecensioniAdapter(options);
 

@@ -9,28 +9,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.e.cv_19.Model.Recensione;
+import com.e.cv_19.Model.Recensioni;
 import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensione, RecensioniAdapter.NoteHolder>{
+public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensioni, RecensioniAdapter.NoteHolder>{
 
     private OnItemClickListner listner;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
 
-    public RecensioniAdapter(@NonNull FirestoreRecyclerOptions<Recensione> options) {
+    public RecensioniAdapter(@NonNull FirestoreRecyclerOptions<Recensioni> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final NoteHolder noteHolder, int i, @NonNull Recensione recensioni) {
+    protected void onBindViewHolder(@NonNull final NoteHolder noteHolder, int i, @NonNull Recensioni recensioni) {
         database.collection("Strutture").document(recensioni.getStruttura()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -45,7 +44,7 @@ public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensione, Rece
         });
 
         noteHolder.textValutazione.setText(String.valueOf(recensioni.getVoto()));
-        noteHolder.testo_recensione.setText(recensioni.getTesto());
+        noteHolder.testo_Recensioni.setText(recensioni.getTesto());
     }
 
     @NonNull
@@ -60,7 +59,7 @@ public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensione, Rece
         TextView textViewName;
         ImageView imageV;
         TextView textValutazione;
-        TextView testo_recensione;
+        TextView testo_Recensioni;
 
 
         public NoteHolder(View itemView) {
@@ -68,7 +67,7 @@ public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensione, Rece
             textViewName = itemView.findViewById(R.id.textViewStruttura);
             imageV=itemView.findViewById(R.id.imageViewStruttura);
             textValutazione=itemView.findViewById(R.id.textViewValutazione);
-            testo_recensione = itemView.findViewById(R.id.textViewRecensione);
+            testo_Recensioni = itemView.findViewById(R.id.textViewRecensioni);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
