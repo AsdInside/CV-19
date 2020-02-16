@@ -9,9 +9,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.e.cv_19.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Activity_ricerca extends AppCompatActivity {
 
@@ -56,21 +63,44 @@ public class Activity_ricerca extends AppCompatActivity {
         startActivity(Ricerca);
     }
 
+    private void gotoPage(String id_struttura) {
+        Intent mostra_struttura = new Intent(this, Activity_mostra_struttura.class);
+        mostra_struttura.putExtra("id",id_struttura);
+        startActivity(mostra_struttura);
+    }
+
     public void Ricerca(View view) {
         if(!TextUtils.isEmpty(campo_ricerca.getText())){
-            Intent Ricerca = new Intent(this, Activity_risultati_ricerca.class);
-            Ricerca.putExtra("Nome Struttura", campo_ricerca.getText());
-            Ricerca.putExtra("Tipo ricerca", "Per nome");
-            startActivity(Ricerca);
+            final String nome = campo_ricerca.getText().toString();
+            FirebaseFirestore.getInstance().collection("Strutture").orderBy("valutazione", Query.Direction.DESCENDING).get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if(!queryDocumentSnapshots.isEmpty()){
+
+                        for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
+
+                            if(document.getString("nome").equalsIgnoreCase(nome)){
+                                gotoPage(document.getId());
+
+                            }
+                        }
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),"nessuna struttura trovata",Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }else{
             Toast.makeText(this, "Inserire il nome di una struttura",
                     Toast.LENGTH_SHORT).show();
         }
     }
 
-    private boolean checkfilters(String città,String categoria,String recensioni){
-        return TextUtils.isEmpty(categoria) || TextUtils.isEmpty(città) || TextUtils.isEmpty(recensioni);
-    }
+
 
     public void Ricerca_avanzata(View view) {
 
@@ -78,17 +108,14 @@ public class Activity_ricerca extends AppCompatActivity {
         String città = seleziona_città.getSelectedItem().toString();
         String recensioni = seleziona_recensioni.getSelectedItem().toString();
 
-        if(checkfilters(città,categoria,recensioni)){
-            Toast.makeText(this, "Inserire filtri ricerca",
-                    Toast.LENGTH_SHORT).show();
-        }else {
-            Intent Ricerca = new Intent(this, Activity_risultati_ricerca.class);
-            Ricerca.putExtra("Tipo ricerca", "Avanzata");
-            Ricerca.putExtra("Città", categoria);
-            Ricerca.putExtra("Categoria", città);
-            Ricerca.putExtra("Recensioni", recensioni);
-            startActivity(Ricerca);
-        }
+
+        Intent Ricerca = new Intent(this, Activity_risultati_ricerca.class);
+        Ricerca.putExtra("Tipo ricerca", "Avanzata");
+        Ricerca.putExtra("Città", città);
+        Ricerca.putExtra("Categoria", categoria);
+        Ricerca.putExtra("Recensioni", recensioni);
+        startActivity(Ricerca);
+
 
 
     }

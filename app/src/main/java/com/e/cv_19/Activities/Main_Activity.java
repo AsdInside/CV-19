@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,12 +16,15 @@ import com.e.cv_19.Adapter.StruttureAdapter;
 import com.e.cv_19.Model.Strutture;
 import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Main_Activity extends AppCompatActivity {
 
@@ -75,10 +79,28 @@ public class Main_Activity extends AppCompatActivity {
 
     public void Ricerca(View view) {
         if(!TextUtils.isEmpty(campo_ricerca.getText())){
-            Intent Ricerca = new Intent(this, Activity_risultati_ricerca.class);
-            Ricerca.putExtra("Nome Struttura", campo_ricerca.getText());
-            Ricerca.putExtra("Tipo ricerca", "Per nome");
-            startActivity(Ricerca);
+            final String nome = campo_ricerca.getText().toString();
+            notebookRef.orderBy("valutazione",Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if(!queryDocumentSnapshots.isEmpty()){
+
+                        for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
+
+                            if(document.getString("nome").equalsIgnoreCase(nome)){
+                                gotoPage(document.getId());
+
+                            }
+                        }
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),"nessuna struttura trovata",Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }else{
             Toast.makeText(this, "Inserire il nome di una struttura",
                     Toast.LENGTH_SHORT).show();

@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -120,12 +121,38 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         startActivity(Ricerca);
     }
 
+    private void gotoPage(String id_struttura) {
+        Intent mostra_struttura = new Intent(this, Activity_mostra_struttura.class);
+        mostra_struttura.putExtra("id",id_struttura);
+        startActivity(mostra_struttura);
+    }
+
+
+
     public void Ricerca(View view) {
         if(!TextUtils.isEmpty(campo_ricerca.getText())){
-            Intent Ricerca = new Intent(this, Activity_risultati_ricerca.class);
-            Ricerca.putExtra("Nome Struttura", campo_ricerca.getText());
-            Ricerca.putExtra("Tipo ricerca", "Per nome");
-            startActivity(Ricerca);
+            final String nome = campo_ricerca.getText().toString();
+            notebookRef.orderBy("valutazione",Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if(!queryDocumentSnapshots.isEmpty()){
+
+                        for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
+
+                            if(document.getString("nome").equalsIgnoreCase(nome)){
+                                gotoPage(document.getId());
+
+                            }
+                        }
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),"nessuna struttura trovata",Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }else{
             Toast.makeText(this, "Inserire il nome di una struttura",
                     Toast.LENGTH_SHORT).show();
@@ -133,21 +160,20 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
     }
 
     public void click_on_filtra(View view) {
-        String voto = filtro_voto.getSelectedItem().toString();
+        final String voto = filtro_voto.getSelectedItem().toString();
         if(voto.length() == 0){
             Toast.makeText(this, "Inserire il filtro dei voti", Toast.LENGTH_SHORT).show();
             return;
         }
-        Query filtro = recensioni.whereEqualTo("voto",voto);
+        Query filtro = recensioni.whereEqualTo("voto",Integer.parseInt(voto));
 
         FirestoreRecyclerOptions<Recensioni> options = new FirestoreRecyclerOptions.Builder<Recensioni>().setQuery(filtro,Recensioni.class).build();
+        adapter.stopListening();
         adapter = new RecensioniStrutturaAdapter(options);
-
-
-        lista_recensioni.setHasFixedSize(true);
-        lista_recensioni.setLayoutManager(new LinearLayoutManager(this));
         lista_recensioni.setAdapter(adapter);
-        onStart();
+
+        adapter.startListening();
+
     }
 
 

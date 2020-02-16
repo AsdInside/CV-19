@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.e.cv_19.Model.Strutture;
 import com.e.cv_19.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -44,11 +46,8 @@ public class Activity_risultati_ricerca extends AppCompatActivity {
 
             effettua_ricerca_avanzata(dati_ricevuti.getString("Città"),dati_ricevuti.getString("Categoria"),dati_ricevuti.getString("Recensioni"));
 
-        }else if(tipo_ricerca.equals("Category button")){
-            effettua_ricerca_per_categoria(dati_ricevuti.getString("Tipo Struttura"));
-
         }else{
-            effettua_ricerca_per_nome(dati_ricevuti.getString("Nome Struttura"));
+            effettua_ricerca_per_categoria(dati_ricevuti.getString("Tipo Struttura"));
 
         }
 
@@ -90,11 +89,15 @@ public class Activity_risultati_ricerca extends AppCompatActivity {
         startActivity(Intent_menù);
     }
 
-
     public void effettua_ricerca_avanzata(String città,String categoria,String recensioni){
-        Query strutture = notebookRef.whereEqualTo("tipologia",categoria);
-        Query filtro_città = strutture.whereEqualTo("citta",città);
-        Query risultato = filtro_città.whereGreaterThanOrEqualTo("valutazione",recensioni);
+        Query risultato = costruzione_query(città,categoria,recensioni);
+
+        risultato.get().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Nessun risultato",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         FirestoreRecyclerOptions<Strutture> options = new FirestoreRecyclerOptions.Builder<Strutture>().setQuery(risultato,Strutture.class).build();
         adapter = new StruttureAdapter(options);
@@ -106,6 +109,62 @@ public class Activity_risultati_ricerca extends AppCompatActivity {
 
 
 
+    }
+
+    private String converti_categoria(String categoria){
+        if(categoria.equals("Ristorante")){
+            return "Ris";
+        }else if(categoria.equals("Hotel")){
+            return "Hot";
+        }else{
+            return "Tur";
+        }
+    }
+
+
+    private Query costruzione_query(String città, String categoria, String recensioni) {
+        Query filtro_città;
+        Query filtro_categoria;
+        Query risultato;
+
+        if(filtri_non_inseriti(città,categoria,recensioni)){
+            return notebookRef.orderBy("valutazione", Query.Direction.DESCENDING);
+        }
+
+        if(!città.isEmpty()){
+            filtro_città = notebookRef.whereEqualTo("citta",città);
+            if(!categoria.isEmpty()){
+                filtro_categoria = filtro_città.whereEqualTo("tipologia",converti_categoria(categoria));
+                if(!recensioni.isEmpty()){
+                    risultato = filtro_categoria.whereGreaterThanOrEqualTo("valutazione",Double.parseDouble(recensioni));
+                }else{
+                    return filtro_categoria;
+                }
+            }else{
+                if(!recensioni.isEmpty()){
+                    risultato = filtro_città.whereGreaterThanOrEqualTo("valutazione",Double.parseDouble(recensioni));
+                }else{
+                    return filtro_città;
+                }
+            }
+        }else{
+            if(!categoria.isEmpty()){
+                filtro_categoria = notebookRef.whereEqualTo("tipologia",converti_categoria(categoria));
+                if(!recensioni.isEmpty()){
+                    risultato = filtro_categoria.whereGreaterThanOrEqualTo("valutazione",Double.parseDouble(recensioni));
+                }else{
+                    return filtro_categoria;
+                }
+            }else{
+                return notebookRef.whereGreaterThanOrEqualTo("valutazione",Double.parseDouble(recensioni));
+            }
+        }
+
+        return risultato;
+    }
+
+    private boolean filtri_non_inseriti(String città, String categoria, String recensioni) {
+        return città.isEmpty() && categoria.isEmpty() && recensioni.isEmpty();
     }
 
     public void effettua_ricerca_per_categoria(String categoria){
@@ -121,15 +180,4 @@ public class Activity_risultati_ricerca extends AppCompatActivity {
 
     }
 
-    public void effettua_ricerca_per_nome(String nome){
-        Query query = notebookRef.whereEqualTo("nome", nome);
-        FirestoreRecyclerOptions<Strutture> options = new FirestoreRecyclerOptions.Builder<Strutture>()
-                .setQuery(query, Strutture.class)
-                .build();
-
-        StruttureAdapter adapter = new StruttureAdapter(options);
-        risultati_ricerca.setAdapter(adapter);
-        risultati_ricerca.setHasFixedSize(true);
-        risultati_ricerca.setLayoutManager(new LinearLayoutManager(this));
-    }
 }

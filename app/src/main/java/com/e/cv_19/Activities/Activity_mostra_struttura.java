@@ -25,6 +25,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
@@ -41,10 +42,9 @@ public class Activity_mostra_struttura extends AppCompatActivity {
     private ImageView immagine_struttura;
     private Spinner voto_recensione;
     private String id_struttura;
-    private String Nickname;
+    private boolean flag = true;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private CollectionReference Recensioni=database.collection("Recensione");
     private CollectionReference notebookRef = database.collection("Strutture");
     private double voti=0;
     private int count=0;
@@ -101,11 +101,18 @@ public class Activity_mostra_struttura extends AppCompatActivity {
     }
 
     public void pubblica_recensione(View view) {
+        if(!flag){
+            Toast.makeText(this, "Hai già recensito questa struttura", Toast.LENGTH_SHORT).show();
+        }
         String testo = testo_recensione.getText().toString();
         String voto = voto_recensione.getSelectedItem().toString();
         if(IsValidText(testo) && IsValidRank(voto)){
 
             String user_id = mAuth.getCurrentUser().getUid();
+            if(!recensione_gia_scritta(user_id)){
+                Toast.makeText(this, "Hai già recensito questa struttura", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             if(user_id.length() == 0){
                 Toast.makeText(this, "IdAutore non trovato", Toast.LENGTH_SHORT).show();
@@ -141,10 +148,12 @@ public class Activity_mostra_struttura extends AppCompatActivity {
                                                     totale+=voti;
                                                     count++;
 
-                                                    media=totale/count;
+
 
 
                                                 }
+                                                media=totale/count;
+                                                notebookRef.document(id_struttura).update("valutazione",media);
 
                                             }
                                         }
@@ -162,8 +171,25 @@ public class Activity_mostra_struttura extends AppCompatActivity {
 
     }
 
+    private boolean recensione_gia_scritta(final String user_id) {
 
 
+        database.collection("Recensione").whereEqualTo("idAutore",user_id).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if(!queryDocumentSnapshots.isEmpty()){
+                            for( DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
+                                if(document.getString("struttura").equals(id_struttura)){
+                                    flag = false;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                });
+        return flag;
+    }
 
 
     private boolean IsValidRank(String voto) {
@@ -185,12 +211,36 @@ public class Activity_mostra_struttura extends AppCompatActivity {
         return true;
     }
 
+    private void gotoPage(String id_struttura) {
+        Intent mostra_struttura = new Intent(this, Activity_mostra_struttura.class);
+        mostra_struttura.putExtra("id",id_struttura);
+        startActivity(mostra_struttura);
+    }
+
     public void Ricerca(View view) {
         if(!TextUtils.isEmpty(campo_ricerca.getText())){
-            Intent Ricerca = new Intent(this, Activity_risultati_ricerca.class);
-            Ricerca.putExtra("Nome Struttura", campo_ricerca.getText());
-            Ricerca.putExtra("Tipo ricerca", "Per nome");
-            startActivity(Ricerca);
+            final String nome = campo_ricerca.getText().toString();
+            notebookRef.orderBy("valutazione", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if(!queryDocumentSnapshots.isEmpty()){
+
+                        for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
+
+                            if(document.getString("nome").equalsIgnoreCase(nome)){
+                                gotoPage(document.getId());
+
+                            }
+                        }
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(),"nessuna struttura trovata",Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }else{
             Toast.makeText(this, "Inserire il nome di una struttura",
                     Toast.LENGTH_SHORT).show();
