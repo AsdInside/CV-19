@@ -30,22 +30,22 @@ public class RecensioniStrutturaAdapter extends FirestoreRecyclerAdapter<Recensi
 
     @Override
     protected void onBindViewHolder(@NonNull NoteHolder noteHolder, int i, @NonNull Recensioni recensioni) {
-        Nickname(noteHolder.Nickname,recensioni.getIdAutore());
+        Nickname(noteHolder,recensioni.getIdAutore());
         noteHolder.Testo.setText(recensioni.getTesto());
         noteHolder.Valutazione.setText(String.valueOf(recensioni.getVoto()));
     }
 
-    private void Nickname(final TextView Nick, String usid) {
+    private void Nickname(final NoteHolder noteholder, String Id_utente) {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        final DocumentReference datiStruttura = database.collection("Utenti").document(usid);
+        final DocumentReference datiUtente = database.collection("Utenti").document(Id_utente);
 
-        datiStruttura.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        datiUtente.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()){
-                       Nick.setText(document.getString("nickname"));
+                        noteholder.Nickname.setText(document.getString("nickname"));
                     }
 
                 }

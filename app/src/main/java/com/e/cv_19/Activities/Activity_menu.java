@@ -1,19 +1,19 @@
 package com.e.cv_19.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.e.cv_19.Controllers.ControllerMain;
 import com.e.cv_19.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
 
 public class Activity_menu extends AppCompatActivity {
 
-    private FirebaseAuth data_info = FirebaseAuth.getInstance();
-    private FirebaseUser current_user = data_info.getCurrentUser();
+    private ControllerMain Controller = new ControllerMain();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,25 +22,19 @@ public class Activity_menu extends AppCompatActivity {
     }
 
     public void click_on_logout(View view) {
-        Intent login =new Intent(this,Activity_login.class);
-        FirebaseAuth.getInstance().signOut();
-        finish();
-        startActivity(login);
+        Controller.effettua_logout(this);
     }
 
     public void click_on_ricerca(View view) {
-        Intent intent_ricerca = new Intent(this,Activity_ricerca.class);
-        startActivity(intent_ricerca);
+        Controller.ricerca_avanzata(this);
     }
 
     public void click_on_recensioni(View view) {
-        Intent intent_recensioni = new Intent(this,Activity_visualizza_recensioni.class);
-        startActivity(intent_recensioni);
+        Controller.mostra_recensioni_personali(this);
     }
 
     public void click_on_impostazioni(View view) {
-        Intent intent_impostazioni = new Intent(this,Activity_modifica_impostazioni.class);
-        startActivity(intent_impostazioni);
+        Controller.mostra_impostazioni(this);
     }
 
     public void click_on_indietro(View view) {

@@ -1,153 +1,77 @@
 package com.e.cv_19.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.e.cv_19.Adapter.StruttureAdapter;
-import com.e.cv_19.Model.Strutture;
+
+import com.e.cv_19.Controllers.ControllerMain;
 import com.e.cv_19.R;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class Main_Activity extends AppCompatActivity {
 
     private TextView campo_ricerca;
     private RecyclerView lista_strutture;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference notebookRef = db.collection("Strutture");
-    private StruttureAdapter adapter;
-    private FirebaseAuth mAuth;
+    private ControllerMain Controller = new ControllerMain();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
 
-        mAuth= FirebaseAuth.getInstance();
-        FirebaseUser currentUser=mAuth.getCurrentUser();
         campo_ricerca = findViewById(R.id.campo_ricerca);
         lista_strutture = findViewById(R.id.Strutture);
 
-        setUpRecyclerView();
-        adapter.setOnItemClickListner(new StruttureAdapter.OnItemClickListner() {
-            @Override
-            public void onItemClick(DocumentSnapshot docSnapshot, int position) {
-                String id_struttura = docSnapshot.getId();
-                gotoPage(id_struttura);
-            }
-        });
+        configura_lista_strutture();
 
     }
 
 
     protected void onStart(){
         super.onStart();
-        adapter.startListening();
+        Controller.mostra_lista();
     }
 
     protected void onStop(){
-
         super.onStop();
-        adapter.stopListening();
+        Controller.togli_lista();
     }
-
-    private void gotoPage(String id_struttura) {
-        Intent mostra_struttura = new Intent(this, Activity_mostra_struttura.class);
-        mostra_struttura.putExtra("id",id_struttura);
-        startActivity(mostra_struttura);
-    }
-
-
-
 
     public void Ricerca(View view) {
         if(!TextUtils.isEmpty(campo_ricerca.getText())){
-            final String nome = campo_ricerca.getText().toString();
-            notebookRef.orderBy("valutazione",Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    if(!queryDocumentSnapshots.isEmpty()){
-
-                        for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
-
-                            if(document.getString("nome").equalsIgnoreCase(nome)){
-                                gotoPage(document.getId());
-
-                            }
-                        }
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(),"nessuna struttura trovata",Toast.LENGTH_SHORT).show();
-                }
-            });
-
+            String nome = campo_ricerca.getText().toString();
+            Controller.ricerca_per_nome(nome,this);
         }else{
-            Toast.makeText(this, "Inserire il nome di una struttura",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Inserire il nome di una struttura", Toast.LENGTH_SHORT).show();
         }
     }
 
 
     public void click_on_map(View view) {
-        Intent Mappa = new Intent(this,Activity_visualizza_mappa.class);
-        startActivity(Mappa);
+        Controller.visualizza_mappa(this);
     }
 
-    public void click_on_località_turistiche(View view) {
-        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Tipo Struttura","Tur");
-        Ricerca.putExtra("Tipo ricerca","Category button");
-        startActivity(Ricerca);
-    }
-
-
+    public void click_on_località_turistiche(View view) { Controller.ricerca_per_categoria(this,"Tur"); }
 
     public void click_on_hotel(View view) {
-        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Tipo Struttura","Hot");
-        Ricerca.putExtra("Tipo ricerca","Category button");
-        startActivity(Ricerca);
+        Controller.ricerca_per_categoria(this,"Hot");
     }
 
     public void click_on_ristoranti(View view) {
-        Intent Ricerca = new Intent(this,Activity_risultati_ricerca.class);
-        Ricerca.putExtra("Tipo Struttura","Ris");
-        Ricerca.putExtra("Tipo ricerca","Category button");
-        startActivity(Ricerca);
+        Controller.ricerca_per_categoria(this,"Ris");
     }
-    private void setUpRecyclerView() {
-        Query ordinamento = notebookRef.orderBy("valutazione",Query.Direction.DESCENDING);
-        FirestoreRecyclerOptions<Strutture> options = new FirestoreRecyclerOptions.Builder<Strutture>().setQuery(ordinamento,Strutture.class).build();
-        adapter = new StruttureAdapter(options);
 
 
-        lista_strutture.setHasFixedSize(false);
-        lista_strutture.setLayoutManager(new LinearLayoutManager(this));
-        lista_strutture.setAdapter(adapter);
+    private void configura_lista_strutture() {
+        Controller.mostra_strutture(lista_strutture,this);
     }
 
     public void click_on_menù(View view) {
-        Intent Intent_menù = new Intent(this,Activity_menu.class);
-        startActivity(Intent_menù);
+        Controller.mostra_menù(this);
     }
 }

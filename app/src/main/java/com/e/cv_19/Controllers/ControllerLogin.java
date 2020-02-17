@@ -29,6 +29,8 @@ public class ControllerLogin {
 
     public ControllerLogin(){}
 
+    //Metodi per Activity_registrazione
+
     public void createUser(final String email, final String password, final String nome, final String cognome, final String nickname,final Activity_registrazione activity_registrazione) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -62,19 +64,19 @@ public class ControllerLogin {
 
     }
 
+    //Metodi per il controllo degli input
 
-
-    public boolean isValidName(String name) {
-        return name.length() > 0;
+    public boolean isValidPassword(String password) {
+        return password.length() != 0;
     }
 
+    public boolean isValidName(String name) { return name.length() > 0; }
 
     public boolean isValidMail(String email) { return email.contains("@"); }
 
+    public boolean isValidPassword(String password, String ripeti_password) { return password.equals(ripeti_password) && password.length() > 4; }
 
-    public boolean isValidPassword(String password, String ripeti_password) {
-        return password.equals(ripeti_password) && password.length() > 4;
-    }
+    //Metodo per Activity_recupera_password
 
     public void invia_email_recupero_password(String email,final Activity_recupera_password activity_recupera_password){
         mAuth.sendPasswordResetEmail(email)
@@ -92,9 +94,7 @@ public class ControllerLogin {
     }
 
 
-    public boolean isValidPassword(String password) {
-        return password.length() != 0;
-    }
+    //Metodi per Activity_login
 
     public void Effettua_login(String email, String password,final Activity_login activity_login)
     {
@@ -128,6 +128,7 @@ public class ControllerLogin {
         }
 
     }
+
 
     public void Mostra_activity_registrazione(Activity_login activity_login){
         Intent activity_registrazione = new Intent(activity_login,Activity_registrazione.class);
