@@ -19,7 +19,7 @@ public class Activity_modifica_impostazioni extends AppCompatActivity {
     private EditText campo_vecchia_password;
     private EditText campo_nuova_password;
     private EditText campo_ripeti_password;
-    private ControllerMain Controller = new ControllerMain();
+    private ControllerMain Controller = new ControllerMain(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class Activity_modifica_impostazioni extends AppCompatActivity {
                 String ripeti_nouva_password = campo_ripeti_password.getText().toString();
                 if(!TextUtils.isEmpty(ripeti_nouva_password)){
                     if(ripeti_nouva_password.equals(nouva_password)){
-                        Controller.modifica_password(vecchia_password,nouva_password,this);
+                        Controller.modifica_password(vecchia_password,nouva_password);
                     }else
                         Toast.makeText(this, "Le password non coincidono",
                                 Toast.LENGTH_SHORT).show();
@@ -57,7 +57,5 @@ public class Activity_modifica_impostazioni extends AppCompatActivity {
 
     }
 
-    public void Invia_richiesta_cancellazione_is_clicked(View view) {
-        Controller.richiesta_cancellazione(this);
-    }
+    public void Invia_richiesta_cancellazione_is_clicked(View view) { Controller.richiesta_cancellazione(); }
 }

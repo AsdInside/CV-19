@@ -4,7 +4,6 @@ package com.e.cv_19.Activities;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.e.cv_19.Controllers.ControllerStruttura;
 import com.e.cv_19.R;
 
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Activity_visualizza_recensioni_struttura extends AppCompatActivity {
 
@@ -25,7 +23,6 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
     private EditText campo_ricerca;
     private RecyclerView lista_recensioni;
     private ControllerStruttura Controller;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +36,9 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         lista_recensioni = findViewById(R.id.ListaRecensioni);
 
 
-        Controller = new ControllerStruttura(getIntent().getExtras().getString("id"));
-        Controller.setSpinner(filtro_voto,this);
-        Controller.configurazione_lista_recensioni(lista_recensioni,this,segnala);
+        Controller = new ControllerStruttura(getIntent().getExtras().getString("id"),this);
+        Controller.setSpinner(filtro_voto);
+        Controller.configurazione_lista_recensioni(lista_recensioni,segnala);
 
     }
 
@@ -57,17 +54,17 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
         Controller.togli_recensioni();
     }
 
-    public void click_on_ristoranti(View view) { Controller.ricerca_per_categoria("Ris",this);}
+    public void click_on_ristoranti(View view) { Controller.ricerca_per_categoria("Ris");}
 
-    public void click_on_località_turistiche(View view) { Controller.ricerca_per_categoria("Tur",this); }
+    public void click_on_località_turistiche(View view) { Controller.ricerca_per_categoria("Tur"); }
 
-    public void click_on_hotel(View view) {Controller.ricerca_per_categoria("Hot",this);}
+    public void click_on_hotel(View view) {Controller.ricerca_per_categoria("Hot");}
 
 
 
     public void Ricerca(View view) {
         if(!TextUtils.isEmpty(campo_ricerca.getText())){
-            Controller.ricerca_per_nome(campo_ricerca.getText().toString(),this);
+            Controller.ricerca_per_nome(campo_ricerca.getText().toString());
         }else{
             Toast.makeText(this, "Inserire il nome di una struttura", Toast.LENGTH_SHORT).show();
         }
@@ -80,7 +77,7 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
             return;
         }
 
-        Controller.filtra_recensioni(lista_recensioni,voto,this);
+        Controller.filtra_recensioni(lista_recensioni,voto);
 
 
     }
@@ -88,13 +85,13 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
 
 
     public void click_on_segnala(View view){
-        Controller.segnala_recensione(this);
+        Controller.segnala_recensione();
     }
 
 
 
 
     public void click_on_menù(View view) {
-        Controller.mostra_menù(this);
+        Controller.mostra_menù();
     }
 }

@@ -40,8 +40,8 @@ public class Activity_mostra_struttura extends AppCompatActivity {
         nome_struttura = findViewById(R.id.textViewNomeStruttura);
         descrizione_struttura = findViewById(R.id.textViewDescrizione);
 
-        Controller = new ControllerStruttura(getIntent().getExtras().getString("id"));
-        Controller.configuraSpinner(this,voto_recensione);
+        Controller = new ControllerStruttura(getIntent().getExtras().getString("id"),this);
+        Controller.configuraSpinner(voto_recensione);
         Controller.mostra_struttura(nome_struttura,descrizione_struttura,immagine_struttura);
 
 
@@ -51,22 +51,22 @@ public class Activity_mostra_struttura extends AppCompatActivity {
 
 
 
-    public void Visualizza_recensioni_struttura(View view) { Controller.mostra_recensioni_struttura(this); }
+    public void Visualizza_recensioni_struttura(View view) { Controller.mostra_recensioni_struttura(); }
 
     public void pubblica_recensione(View view) {
-        Controller.pubblica_recensione(this,testo_recensione.getText().toString(),voto_recensione.getSelectedItem().toString());
+        Controller.pubblica_recensione(testo_recensione.getText().toString(),voto_recensione.getSelectedItem().toString());
 
     }
 
 
     public void Ricerca(View view) {
         if(!TextUtils.isEmpty(campo_ricerca.getText())){
-            Controller.ricerca_per_nome(campo_ricerca.getText().toString(),this);
+            Controller.ricerca_per_nome(campo_ricerca.getText().toString());
         }else{
             Toast.makeText(this, "Inserire il nome di una struttura", Toast.LENGTH_SHORT).show();
         }
     }
 
 
-    public void click_on_menù(View view) { ControllerStruttura.mostra_menù(this);}
+    public void click_on_menù(View view) { Controller.mostra_menù();}
 }

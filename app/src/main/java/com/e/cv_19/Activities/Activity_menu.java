@@ -11,7 +11,7 @@ import com.e.cv_19.R;
 
 public class Activity_menu extends AppCompatActivity {
 
-    private ControllerMain Controller = new ControllerMain();
+    private ControllerMain Controller = new ControllerMain(this);
 
 
 
@@ -22,19 +22,19 @@ public class Activity_menu extends AppCompatActivity {
     }
 
     public void click_on_logout(View view) {
-        Controller.effettua_logout(this);
+        Controller.effettua_logout();
     }
 
     public void click_on_ricerca(View view) {
-        Controller.ricerca_avanzata(this);
+        Controller.ricerca_avanzata();
     }
 
     public void click_on_recensioni(View view) {
-        Controller.mostra_recensioni_personali(this);
+        Controller.mostra_recensioni_personali();
     }
 
     public void click_on_impostazioni(View view) {
-        Controller.mostra_impostazioni(this);
+        Controller.mostra_impostazioni();
     }
 
     public void click_on_indietro(View view) {

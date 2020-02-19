@@ -13,15 +13,14 @@ import com.e.cv_19.R;
 public class Activity_visualizza_recensioni extends AppCompatActivity {
 
     RecyclerView lista_recensioni;
-    private ControllerMain Controller = new ControllerMain();
+    private ControllerMain Controller = new ControllerMain(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizza_recensioni);
         lista_recensioni = findViewById(R.id.ListaRecensioni);
-        Configura_lista_recensioni();
-
+        Controller.mostra_recensioni_personali(lista_recensioni);
     }
 
     protected void onStart(){
@@ -39,6 +38,6 @@ public class Activity_visualizza_recensioni extends AppCompatActivity {
         finish();
     }
 
-    public void Configura_lista_recensioni(){ Controller.mostra_recensioni_personali(lista_recensioni,this); }
+
 
 }

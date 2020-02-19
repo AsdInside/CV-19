@@ -2,7 +2,6 @@ package com.e.cv_19.Activities;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -14,34 +13,22 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.e.cv_19.Controllers.ControllerMappa;
 import com.e.cv_19.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.Map;
 
 public class Activity_visualizza_mappa extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private LocationManager gestore_posizione_utente;
     private LocationListener aggiornamento_posizione_utente;
-    private FirebaseFirestore database = FirebaseFirestore.getInstance();
-    private CollectionReference Strutture = database.collection("Strutture");
+    private ControllerMappa Controller = new ControllerMappa(this);
 
 
     //Verifica che l'utente accetti la richiesta da parte del dispositivo di conoscere la sua posizione attuale
@@ -98,7 +85,7 @@ public class Activity_visualizza_mappa extends FragmentActivity implements OnMap
                 mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(posizione_attuale_utente).title("Tu"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(posizione_attuale_utente));
-                Inserimento_marker_strutture();
+                Controller.Inserimento_marker_strutture(mMap);
 
             }
 
@@ -134,67 +121,13 @@ public class Activity_visualizza_mappa extends FragmentActivity implements OnMap
             mMap.clear();
             mMap.addMarker(new MarkerOptions().position(coordinate_ultima_posizione).title("MSA"));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate_ultima_posizione,10));
-            Inserimento_marker_strutture();
-            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                @Override
-                public void onInfoWindowClick(Marker marker) {
-                    final String nome = marker.getTitle();
-                    Strutture.whereEqualTo("nome",nome).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                        @Override
-                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            for(DocumentSnapshot document : queryDocumentSnapshots.getDocuments()){
-                                gotoPage(document.getId());
-                            }
-                        }
-                    });
-                }
-            });
+            Controller.Inserimento_marker_strutture(mMap);
+
         }
 
 
     }
 
 
-    private void gotoPage(String id_struttura) {
-        Intent mostra_struttura = new Intent(this, Activity_mostra_struttura.class);
-        mostra_struttura.putExtra("id",id_struttura);
-        finish();
-        startActivity(mostra_struttura);
-    }
 
-
-    private void Inserimento_marker_strutture() {
-        Strutture.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot Struttura : task.getResult()){
-                        Map<String,Object> dati = Struttura.getData();
-                        Double lat = (Double) dati.get("latitudine");
-                        Double lng = (Double) dati.get("longitudine");
-                        String nome = (String) dati.get("nome");
-                        LatLng coordinate_posizione_struttura = new LatLng(lat.doubleValue(),lng.doubleValue());;
-                        mMap.addMarker(new MarkerOptions().position(coordinate_posizione_struttura).title(nome)
-                                .snippet(Descrizione_struttura((String)dati.get("tipologia"),(String)dati.get("indirizzo"),(String)dati.get("citta"))))
-                                .setIcon(SetColore((String)dati.get("tipologia")));
-                    }
-                }
-            }
-        });
-    }
-
-    private BitmapDescriptor SetColore(String tipologia) {
-        if(tipologia.equals("Ris")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
-        }else if(tipologia.equals("Hot")){
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
-        }else{
-            return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
-        }
-
-    }
-
-    private String Descrizione_struttura(String tipologia, String indirizzo, String città) {
-        return tipologia+","+indirizzo+","+città;
-    }
 }

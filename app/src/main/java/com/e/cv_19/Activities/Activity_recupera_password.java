@@ -14,7 +14,7 @@ import com.e.cv_19.R;
 public class Activity_recupera_password extends AppCompatActivity {
 
     private EditText campo_email;
-    private ControllerLogin Controller = new ControllerLogin();
+    private ControllerLogin Controller = new ControllerLogin(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class Activity_recupera_password extends AppCompatActivity {
         } else if (!email.contains("@")) {
             Toast.makeText(getApplicationContext(), "Mail non valida", Toast.LENGTH_SHORT).show();
         } else {
-            Controller.invia_email_recupero_password(email,Activity_recupera_password.this);
+            Controller.invia_email_recupero_password(email);
         }
 
     }

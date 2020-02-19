@@ -18,7 +18,7 @@ public class Activity_registrazione extends AppCompatActivity {
     private EditText campo_email;
     private EditText campo_password;
     private EditText campo_ripeti_password;
-    private ControllerLogin Controller = new ControllerLogin();
+    private ControllerLogin Controller = new ControllerLogin(this);
 
     @Override
     public void onStart() {
@@ -56,7 +56,7 @@ public class Activity_registrazione extends AppCompatActivity {
         } else if (!Controller.isValidPassword(password, ripeti_password)) {
             Toast.makeText(getApplicationContext(), "Password non coincidente o inferiore a 5 caratteri", Toast.LENGTH_SHORT).show();
         } else {
-            Controller.createUser(email, password,nome,cognome,nickname,Activity_registrazione.this);
+            Controller.createUser(email, password,nome,cognome,nickname);
         }
 
     }

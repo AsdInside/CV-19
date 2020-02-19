@@ -16,7 +16,7 @@ public class Activity_login extends AppCompatActivity {
 
     private EditText campo_email;
     private EditText campo_password;
-    private ControllerLogin Controller = new ControllerLogin();
+    private ControllerLogin Controller = new ControllerLogin(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class Activity_login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         campo_email = findViewById(R.id.Editviewemail);
         campo_password = findViewById(R.id.editTextpassword);
-        Controller.Auto_Login(this);
+        Controller.Auto_Login();
     }
 
 
@@ -50,18 +50,18 @@ public class Activity_login extends AppCompatActivity {
         } else if (!Controller.isValidPassword(password)) {
             Toast.makeText(getApplicationContext(), "La password deve avere almeno 4 caratteri", Toast.LENGTH_SHORT).show();
         } else {
-            Controller.Effettua_login(username,password,this);
+            Controller.Effettua_login(username,password);
         }
 
 
     }
 
     public void Registrati_is_clicked(View view) {
-        Controller.Mostra_activity_registrazione(this);
+        Controller.Mostra_activity_registrazione();
     }
 
     public void Recupera_is_clicked(View view) {
-        Controller.Mostra_activity_recupero_password(this);
+        Controller.Mostra_activity_recupero_password();
     }
 
 

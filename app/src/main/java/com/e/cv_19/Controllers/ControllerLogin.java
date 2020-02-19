@@ -5,8 +5,9 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.e.cv_19.Activities.Activity_login;
+
 import com.e.cv_19.Activities.Activity_recupera_password;
 import com.e.cv_19.Activities.Activity_registrazione;
 import com.e.cv_19.Activities.Main_Activity;
@@ -25,24 +26,28 @@ import java.util.Map;
 public class ControllerLogin {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
+    private AppCompatActivity Context;
 
 
-    public ControllerLogin(){}
+    public ControllerLogin(AppCompatActivity Activity){
+        Context = Activity;
+    }
 
     //Metodi per Activity_registrazione
 
-    public void createUser(final String email, final String password, final String nome, final String cognome, final String nickname,final Activity_registrazione activity_registrazione) {
+    public void createUser(final String email, final String password, final String nome, final String cognome, final String nickname) {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(activity_registrazione, "Registrazione avvenuta con successo", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Context, "Registrazione avvenuta con successo", Toast.LENGTH_SHORT).show();
                             addFirestore(nickname, nome, cognome);
-                            Intent main_activity = new Intent(activity_registrazione, Main_Activity.class);
-                            activity_registrazione.startActivity(main_activity);
-                            activity_registrazione.finish();
+                            Intent main_activity = new Intent(Context, Main_Activity.class);
+                            Context.finish();
+                            Context.startActivity(main_activity);
+
                         } else {
-                            Toast.makeText(activity_registrazione, "Registratione fallita.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Context, "Registratione fallita.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -78,16 +83,16 @@ public class ControllerLogin {
 
     //Metodo per Activity_recupera_password
 
-    public void invia_email_recupero_password(String email,final Activity_recupera_password activity_recupera_password){
+    public void invia_email_recupero_password(String email){
         mAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(activity_recupera_password, "Mail di recupero inviata", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Context, "Mail di recupero inviata", Toast.LENGTH_SHORT).show();
 
                         } else {
-                            Toast.makeText(activity_recupera_password, "Impossibile inviare mail di recupero", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Context, "Impossibile inviare mail di recupero", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -96,16 +101,16 @@ public class ControllerLogin {
 
     //Metodi per Activity_login
 
-    public void Effettua_login(String email, String password,final Activity_login activity_login)
+    public void Effettua_login(String email, String password)
     {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Auto_Login(activity_login);
+                            Auto_Login();
                         } else {
-                            Toast.makeText(activity_login, "Autenticazione fallita.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Context, "Autenticazione fallita.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -113,7 +118,7 @@ public class ControllerLogin {
 
     }
 
-    public void Auto_Login(Activity_login activity_login) {
+    public void Auto_Login() {
 
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setTimestampsInSnapshotsEnabled(true)
@@ -122,23 +127,23 @@ public class ControllerLogin {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
 
-            Intent main_activity = new Intent(activity_login,Main_Activity.class);
-            activity_login.startActivity(main_activity);
+            Intent main_activity = new Intent(Context,Main_Activity.class);
+            Context.startActivity(main_activity);
 
         }
 
     }
 
 
-    public void Mostra_activity_registrazione(Activity_login activity_login){
-        Intent activity_registrazione = new Intent(activity_login,Activity_registrazione.class);
-        activity_login.startActivity(activity_registrazione);
+    public void Mostra_activity_registrazione(){
+        Intent activity_registrazione = new Intent(Context,Activity_registrazione.class);
+        Context.startActivity(activity_registrazione);
 
     }
 
-    public void Mostra_activity_recupero_password(Activity_login activity_login){
-        Intent activity_recupera_password = new Intent(activity_login,Activity_recupera_password.class);
-        activity_login.startActivity(activity_recupera_password);
+    public void Mostra_activity_recupero_password(){
+        Intent activity_recupera_password = new Intent(Context,Activity_recupera_password.class);
+        Context.startActivity(activity_recupera_password);
     }
 
 
