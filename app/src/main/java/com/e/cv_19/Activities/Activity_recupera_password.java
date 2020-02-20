@@ -8,21 +8,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.e.cv_19.Controllers.ControllerLogin;
 import com.e.cv_19.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class Activity_recupera_password extends AppCompatActivity {
 
     private EditText campo_email;
-    private FirebaseAuth auth;
+    private ControllerLogin Controller = new ControllerLogin(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recupera_password);
-        auth = FirebaseAuth.getInstance();
         campo_email = findViewById(R.id.editTextEmail);
     }
 
@@ -35,18 +32,7 @@ public class Activity_recupera_password extends AppCompatActivity {
         } else if (!email.contains("@")) {
             Toast.makeText(getApplicationContext(), "Mail non valida", Toast.LENGTH_SHORT).show();
         } else {
-            auth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Mail di recupero inviata", Toast.LENGTH_SHORT).show();
-                                finish();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Impossibile inviare mail di recupero", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+            Controller.invia_email_recupero_password(email);
         }
 
     }

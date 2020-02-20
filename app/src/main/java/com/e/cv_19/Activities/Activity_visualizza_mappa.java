@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.e.cv_19.Controllers.ControllerMappa;
 import com.e.cv_19.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,22 +21,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.Map;
 
 public class Activity_visualizza_mappa extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private LocationManager gestore_posizione_utente;
     private LocationListener aggiornamento_posizione_utente;
-    private FirebaseFirestore database = FirebaseFirestore.getInstance();
-    private CollectionReference Strutture = database.collection("Strutture");
+    private ControllerMappa Controller = new ControllerMappa(this);
 
 
     //Verifica che l'utente accetti la richiesta da parte del dispositivo di conoscere la sua posizione attuale
@@ -77,7 +70,7 @@ public class Activity_visualizza_mappa extends FragmentActivity implements OnMap
      * installed Google Play services and returned to the app.
      */
 
-    //TODO: eliminare solo il vecchio marker che segna la posizione dell'utente dalla mappa e acquisire le coordinate delle strutture
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -92,7 +85,7 @@ public class Activity_visualizza_mappa extends FragmentActivity implements OnMap
                 mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(posizione_attuale_utente).title("Tu"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(posizione_attuale_utente));
-                Inserimento_marker_strutture();
+                Controller.Inserimento_marker_strutture(mMap);
 
             }
 
@@ -119,7 +112,7 @@ public class Activity_visualizza_mappa extends FragmentActivity implements OnMap
             gestore_posizione_utente.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, aggiornamento_posizione_utente);
 
             Location ultima_posizione_utente = gestore_posizione_utente.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            LatLng coordinate_ultima_posizione = null;
+            LatLng coordinate_ultima_posizione;
             if (ultima_posizione_utente != null) {
                 coordinate_ultima_posizione = new LatLng(ultima_posizione_utente.getLatitude(),ultima_posizione_utente.getLongitude());
             }else{
@@ -127,28 +120,14 @@ public class Activity_visualizza_mappa extends FragmentActivity implements OnMap
             }
             mMap.clear();
             mMap.addMarker(new MarkerOptions().position(coordinate_ultima_posizione).title("MSA"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate_ultima_posizione));
-            Inserimento_marker_strutture();
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate_ultima_posizione,10));
+            Controller.Inserimento_marker_strutture(mMap);
+
         }
 
 
     }
 
-    private void Inserimento_marker_strutture() {
-        Strutture.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot Struttura : task.getResult()){
-                        Map<String,Object> dati = Struttura.getData();
-                        Double lat = (Double) dati.get("latitudine");
-                        Double lng = (Double) dati.get("longitudine");
-                        String nome = (String) dati.get("nome");
-                        LatLng coordinate_posizione_struttura = new LatLng(lat.doubleValue(),lng.doubleValue());;
-                        mMap.addMarker(new MarkerOptions().position(coordinate_posizione_struttura).title(nome));
-                    }
-                }
-            }
-        });
-    }
+
+
 }

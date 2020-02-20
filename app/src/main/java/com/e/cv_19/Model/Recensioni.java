@@ -1,22 +1,13 @@
 package com.e.cv_19.Model;
 
 public class Recensioni {
-    private String idAutore;
-    private String struttura;
     private String testo;
+    private String idAutore;
     private int voto;
-
-    public Recensioni(){}
-
-    public  Recensioni(String autore,String recensita,String testo,int val){
-        this.idAutore = autore;
-        this.struttura = recensita;
-        this.testo = testo;
-        this.voto = val;
-    }
+    private String struttura;
 
     public String getTesto() {
-        return this.testo;
+        return testo;
     }
 
     public void setTesto(String testo) {
@@ -24,15 +15,15 @@ public class Recensioni {
     }
 
     public String getIdAutore() {
-        return this.idAutore;
+        return idAutore;
     }
 
-    public void setIdAutore(String Nickname) {
-        this.idAutore = Nickname;
+    public void setIdAutore(String idAutore) {
+        this.idAutore = idAutore;
     }
 
     public String getStruttura() {
-        return this.struttura;
+        return struttura;
     }
 
     public void setStruttura(String struttura) {
@@ -40,12 +31,20 @@ public class Recensioni {
     }
 
     public int getVoto() {
-        return this.voto;
+        return voto;
     }
 
-    public void setVoto(int valutazione) { this.voto = valutazione; }
+    public void setVoto(int voto) {
+        this.voto = voto;
+    }
 
+    public Recensioni(){}
 
+    public Recensioni(String testo,String Autore,String recensita,int valutazione){
+       this.testo = testo;
+       idAutore = Autore;
+        struttura = recensita;
+       voto = valutazione;
+    }
 
 }
-

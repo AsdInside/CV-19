@@ -44,7 +44,7 @@ public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensioni, Rece
         });
 
         noteHolder.textValutazione.setText(String.valueOf(recensioni.getVoto()));
-        noteHolder.testo_Recensioni.setText(recensioni.getTesto());
+        noteHolder.testo_Recensione.setText(recensioni.getTesto());
     }
 
     @NonNull
@@ -59,7 +59,7 @@ public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensioni, Rece
         TextView textViewName;
         ImageView imageV;
         TextView textValutazione;
-        TextView testo_Recensioni;
+        TextView testo_Recensione;
 
 
         public NoteHolder(View itemView) {
@@ -67,7 +67,7 @@ public class RecensioniAdapter extends FirestoreRecyclerAdapter<Recensioni, Rece
             textViewName = itemView.findViewById(R.id.textViewStruttura);
             imageV=itemView.findViewById(R.id.imageViewStruttura);
             textValutazione=itemView.findViewById(R.id.textViewValutazione);
-            testo_Recensioni = itemView.findViewById(R.id.textViewRecensioni);
+            testo_Recensione = itemView.findViewById(R.id.textViewRecensione);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
