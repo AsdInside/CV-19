@@ -26,8 +26,9 @@ public class Main_Activity extends AppCompatActivity {
 
         campo_ricerca = findViewById(R.id.campo_ricerca);
         lista_strutture = findViewById(R.id.Strutture);
+        Controller.mostra_strutture(lista_strutture);
 
-        configura_lista_strutture();
+
 
     }
 
@@ -64,11 +65,6 @@ public class Main_Activity extends AppCompatActivity {
 
     public void click_on_ristoranti(View view) {
         Controller.ricerca_per_categoria("Ris");
-    }
-
-
-    private void configura_lista_strutture() {
-        Controller.mostra_strutture(lista_strutture);
     }
 
     public void click_on_menù(View view) {
