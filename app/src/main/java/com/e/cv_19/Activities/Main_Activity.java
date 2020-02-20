@@ -3,7 +3,7 @@ package com.e.cv_19.Activities;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +15,7 @@ import com.e.cv_19.R;
 
 public class Main_Activity extends AppCompatActivity {
 
-    private TextView campo_ricerca;
+    private EditText campo_ricerca;
     private RecyclerView lista_strutture;
     private ControllerMain Controller = new ControllerMain(this);
 
