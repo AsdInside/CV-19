@@ -24,25 +24,19 @@ public class FXMLDocumentController {
     @FXML
     private PasswordField passwd;
     @FXML
-    void btnpressed(ActionEvent event) {
-     try {
-             System.out.println("ENTRATO NEL BUTTON");
-            FXMLLoader loader = getFxml("FXMLGestioneVisitatori");
-            GestioneVisitatori = loadStage(loader);
-           
-            GestioneVisitatoriController = loader.getController();
-            
-            GestioneVisitatori.show();
-        }
-        catch (Exception e) {
-            System.out.println("Errore");
-    }
+   public void btnpressed(ActionEvent event) {
+      DesktopApplication.btnpressed();
+       
+     
     }
 
     @FXML
     void initialize() {
 
     }
+    
+    
+    
 
      private static FXMLLoader getFxml(String name) {
         return new FXMLLoader(GestioneVisitatori.class.getResource(

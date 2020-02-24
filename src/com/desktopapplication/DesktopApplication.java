@@ -22,18 +22,27 @@ public class DesktopApplication extends Application {
      private static Stage GestioneVisitatori = null;
      private static Stage Login=null;
      private static GestioneVisitatori GestioneVisitatoriController;
+
+     
+    public static void btnpressed() {
+        show_gestione();
+    }
   
      @Override
     public void start(Stage stage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
-        stage.show();
+    
+        Login=stage;
+        show_login(stage);
     }
     
-  /*  public static void show_login(Stage stage) throws IOException{
+    
+      public static void closeLogin() {
+        Login .close();
+        Login = null;
+    }
+      
+      
+    public static void show_login(Stage stage) throws IOException{
     
     try{
      FXMLLoader root = getFxml("FXMLDocument");
@@ -41,29 +50,16 @@ public class DesktopApplication extends Application {
                 Login = stage;
             else
         Login=loadStage(root);
-        
         Login.setScene(new Scene(root.load()));
         Login.show();
     }catch(IOException e){
         System.out.println("Errore login");
     }
-    */
-    public static void btnpressed(ActionEvent event){
-         try {
-             System.out.println("ENTRATO NEL BUTTON");
-            FXMLLoader loader = getFxml("FXMLGestioneVisitatori");
-            GestioneVisitatori = loadStage(loader);
-           
-            GestioneVisitatoriController = loader.getController();
-            
-            GestioneVisitatori.show();
-        }
-        catch (Exception e) {
-            System.out.println("Errore");
-        }
-       
     }
     
+   
+ 
+  
    
     public static void main(String[] args) {
         launch(args);
@@ -78,5 +74,22 @@ public class DesktopApplication extends Application {
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
         return stage;
+    }
+    
+      private static void show_gestione(){
+         
+          try {
+             
+            FXMLLoader loader = getFxml("FXMLGestioneVisitatori");
+            GestioneVisitatori = loadStage(loader);
+           
+          //  GestioneVisitatoriController = loader.getController();
+            closeLogin();
+            GestioneVisitatori.show();
+        }
+        catch (Exception e) {
+            System.out.println(e);
+    }
+          
     }
 }

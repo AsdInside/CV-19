@@ -1,13 +1,18 @@
 package Controller;
 
+import com.desktopapplication.GestioneVisitatori;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class FXMLGestioneVisitatoriController {
-
+   
     @FXML
     private ResourceBundle resources;
 
@@ -25,16 +30,19 @@ public class FXMLGestioneVisitatoriController {
 
     @FXML
     void clickcancellazioni(ActionEvent event) {
-
+       GestioneVisitatori.clickcancellazioni();
     }
 
     @FXML
     void clickiscritti(ActionEvent event) {
-
+       GestioneVisitatori.clickiscritti();
     }
 
     @FXML
     void clicksegnalazioni(ActionEvent event) {
-
+            GestioneVisitatori.clicksegnalazioni();
+           
     }
+    
+    
     }
