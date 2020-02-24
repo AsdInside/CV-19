@@ -41,16 +41,16 @@ public class Activity_login extends AppCompatActivity {
 
 
 
-        String username=campo_email.getText().toString();
+        String email=campo_email.getText().toString();
         String password=campo_password.getText().toString();
 
 
-        if (!Controller.isValidMail(username)) {
+        if (!Controller.isValidMail(email)) {
             Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_SHORT).show();
         } else if (!Controller.isValidPassword(password)) {
             Toast.makeText(getApplicationContext(), "La password deve avere almeno 4 caratteri", Toast.LENGTH_SHORT).show();
         } else {
-            Controller.Effettua_login(username,password);
+            Controller.Effettua_login(email,password);
         }
 
 
