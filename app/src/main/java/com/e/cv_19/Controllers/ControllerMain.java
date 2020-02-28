@@ -237,7 +237,7 @@ public class ControllerMain {
             Toast.makeText(Context, "La motivazione deve essere di almeno 10 caratteri", Toast.LENGTH_SHORT).show();
         }
         final FirebaseUser utente = FirebaseAuth.getInstance().getCurrentUser();
-        String id_utente= utente.getUid();
+        final String id_utente= utente.getUid();
         final DocumentReference datiutente = database.collection("Utenti").document(id_utente);
 
         datiutente.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -249,6 +249,7 @@ public class ControllerMain {
                     obj.put("motivazione", motivazione);
                     obj.put("email", utente.getEmail());
                     obj.put("nickname", nickname);
+                    obj.put("idUtente",id_utente);
 
                     database.collection("Cancellazioni")
                             .add(obj)

@@ -341,6 +341,7 @@ public class ControllerStruttura {
                     segnalazione.put("nickname", documentSnapshot.getString("nickname"));
                     segnalazione.put("struttura", id_struttura);
                     segnalazione.put("testo",testo);
+                    segnalazione.put("recensione",recensione_selezionata);
                     database.collection("Segnalazioni").add(segnalazione).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
