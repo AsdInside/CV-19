@@ -245,7 +245,7 @@ public class ControllerStruttura {
 
 
     //Metodi per Activity_visualizza_recensioni_struttura
-    //TODO PROVARE DOPO AVER PULITO IL DATABASE
+
     public void configurazione_lista_recensioni(RecyclerView lista_recensioni,Button segnalazione) {
         recensioni = database.collection("Recensione").whereEqualTo("struttura",id_struttura);
         segnala = segnalazione;
@@ -262,6 +262,7 @@ public class ControllerStruttura {
             public void onItemClick(DocumentSnapshot docSnapshot, int position) {
                 idAutore = docSnapshot.getString("idAutore");
                 recensione_selezionata = docSnapshot.getId();
+                testo = docSnapshot.getString("testo");
                 if(segnala.getVisibility() != View.VISIBLE){
                     segnala.setVisibility(View.VISIBLE);
                 }
@@ -297,6 +298,7 @@ public class ControllerStruttura {
             public void onItemClick(DocumentSnapshot docSnapshot, int position) {
                 idAutore = docSnapshot.getString("idAutore");
                 recensione_selezionata = docSnapshot.getId();
+                testo = docSnapshot.getString("testo");
                 if(segnala.getVisibility() != View.VISIBLE){
                     segnala.setVisibility(View.VISIBLE);
                 }
@@ -326,12 +328,12 @@ public class ControllerStruttura {
     }
 
 
-    //TODO PROVARE DOPO AVER PULITO IL DATABASE
+
     public void segnala_recensione() {
 
         final DocumentReference datiutente = database.collection("Utenti").document(idAutore);
         final DocumentReference recensione = database.collection("Recensione").document(recensione_selezionata);
-        getTesto(recensione);
+       // getTesto(recensione);
 
         datiutente.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -370,8 +372,7 @@ public class ControllerStruttura {
 
         segnala.setVisibility(View.GONE);
         idAutore = null;
-        testo = null;
-        recensione_selezionata = null;
+
     }
 
     public void setSpinner(Spinner filtro_voto) {
