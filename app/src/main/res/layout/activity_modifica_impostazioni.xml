@@ -182,7 +182,7 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="inserire nuova password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textColorHint="#0C27CA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
