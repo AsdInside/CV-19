@@ -354,7 +354,6 @@ public class ControllerStruttura {
 
 
         segnala.setVisibility(View.GONE);
-        idAutore = null;
 
     }
 
