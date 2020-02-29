@@ -48,7 +48,8 @@ public class ControllerStruttura {
     private Button segnala;
     private String id_struttura;
     private Query recensioni;
-    private boolean flag;
+    private boolean segnalato = false;
+    private boolean flag = true;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private CollectionReference notebookRef = database.collection("Strutture");
@@ -132,6 +133,7 @@ public class ControllerStruttura {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Toast.makeText(Context, "Recensione pubblicata", Toast.LENGTH_SHORT).show();
+                            flag = false;
                             Log.d("Recensione", "DocumentSnapshot added with ID: " + documentReference.getId());
                             database.collection("Recensione").whereEqualTo("struttura",id_struttura)
                                     .get()
@@ -175,7 +177,6 @@ public class ControllerStruttura {
 
     private boolean recensione_gia_scritta(final String user_id) {
 
-        flag  = true;
         database.collection("Recensione").whereEqualTo("idAutore",user_id).get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -315,7 +316,25 @@ public class ControllerStruttura {
     public void segnala_recensione() {
 
         final DocumentReference datiutente = database.collection("Utenti").document(idAutore);
-        final DocumentReference recensione = database.collection("Recensione").document(recensione_selezionata);
+
+        database.collection("Segnalazioni").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document: task.getResult()) {
+                        if(document.getString("recensione").equals(recensione_selezionata)){
+                            Toast.makeText(Context, "Recensione già segnalata", Toast.LENGTH_SHORT).show();
+                            segnalato = true;
+                        }
+                    }
+                }
+            }
+        });
+
+        if(segnalato){
+            segnalato = false;
+            return;
+        }
 
         datiutente.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
