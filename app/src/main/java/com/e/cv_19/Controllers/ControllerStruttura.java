@@ -338,6 +338,7 @@ public class ControllerStruttura {
             public void onSuccess(DocumentSnapshot documentSnapshot){
                 if (documentSnapshot.exists()) {
                     final Map<String, Object> segnalazione = new HashMap<>();
+                    segnalazione.put("idAutore",idAutore);
                     segnalazione.put("nickname", documentSnapshot.getString("nickname"));
                     segnalazione.put("struttura", id_struttura);
                     segnalazione.put("testo",testo);
