@@ -48,7 +48,6 @@ public class ControllerStruttura {
     private Button segnala;
     private String id_struttura;
     private Query recensioni;
-    private boolean segnalato = false;
     private boolean flag = true;
     private FirebaseFirestore database = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -316,25 +315,6 @@ public class ControllerStruttura {
     public void segnala_recensione() {
 
         final DocumentReference datiutente = database.collection("Utenti").document(idAutore);
-
-        database.collection("Segnalazioni").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        if(document.getString("recensione").equals(recensione_selezionata)){
-                            Toast.makeText(Context, "Recensione già segnalata", Toast.LENGTH_SHORT).show();
-                            segnalato = true;
-                        }
-                    }
-                }
-            }
-        });
-
-        if(segnalato){
-            segnalato = false;
-            return;
-        }
 
         datiutente.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
