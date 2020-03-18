@@ -4,198 +4,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/menu"
     tools:context=".Activities.Activity_menu">
-
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageViewLogout"
-            android:layout_width="75dp"
-            android:layout_height="57dp"
-            android:clickable="true"
-            android:contentDescription="@string/logout"
-            android:onClick="click_on_logout"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            app:srcCompat="@drawable/baseline_perm_identity_black_18dp"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/textViewLogout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="click_on_logout"
-            android:padding="15dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@string/logout"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:focusable="true" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41000003">
-
-        <ImageView
-            android:id="@+id/imageViewRicercaAvanzata"
-            android:layout_width="75dp"
-            android:layout_height="57dp"
-            android:clickable="true"
-            android:contentDescription="@string/ricerca_avanzata"
-            android:onClick="click_on_ricerca"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            app:srcCompat="@drawable/baseline_search_black_18dp"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/textViewRicercaAvanzata"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="click_on_ricerca"
-            android:padding="15dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@string/ricerca_avanzata"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:focusable="true" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23000002">
-
-        <ImageView
-            android:id="@+id/imageViewRecensioniPersonali"
-            android:layout_width="75dp"
-            android:layout_height="57dp"
-            android:clickable="true"
-            android:contentDescription="@string/recensioni_personali"
-            android:onClick="click_on_recensioni"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            app:srcCompat="@drawable/baseline_view_list_black_18dp"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/textViewrecensioniPersonali"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="click_on_recensioni"
-            android:padding="15dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@string/recensioni_personali"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:focusable="true" />
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="cursive"
         android:text="@string/menu"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#D8000000"
-        android:textSize="50sp"
+        android:textColor="#F5EC07"
+        android:textSize="65sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.100000024" />
-
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32">
-
-        <ImageView
-            android:id="@+id/imageViewImpostazioni"
-            android:layout_width="75dp"
-            android:layout_height="57dp"
-            android:clickable="true"
-            android:contentDescription="@string/Modifica_imp"
-            android:onClick="click_on_impostazioni"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            app:srcCompat="@drawable/baseline_list_alt_black_18dp"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/textViewImpostazioni"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="click_on_impostazioni"
-            android:padding="15dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@string/Modifica_imp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:focusable="true" />
-
-    </LinearLayout>
+        app:layout_constraintVertical_bias="0.12" />
 
     <Button
         android:id="@+id/buttonIndietro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F5EC07"
+        android:background="@drawable/btnyellow"
         android:onClick="click_on_indietro"
         android:text="@string/Indietro"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.859" />
+
+    <TextView
+        android:id="@+id/textViewLogout"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="click_on_logout"
+        android:padding="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/logout"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.737"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/textViewRicercaAvanzata"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="click_on_ricerca"
+        android:padding="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/ricerca_avanzata"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.624"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/textViewImpostazioni"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="click_on_impostazioni"
+        android:padding="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/Modifica_imp"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/textViewrecensioniPersonali"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="click_on_recensioni"
+        android:padding="15dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/recensioni_personali"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.371"
+        tools:ignore="RtlCompat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

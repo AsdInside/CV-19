@@ -56,6 +56,9 @@
     <string name="logout">Logout</string>
     <string name="consiglia_viaggi_19">Consiglia Viaggi 19</string>
     <string name="recupera_password">Recupera Password</string>
+    <string name="ripeti_nuova_password">ripeti nuova password</string>
+    <string name="inserire_nuova_password">inserire nuova password</string>
+    <string name="invia_richiesta_cancellazione_account">Invia richiesta cancellazione account</string>
 
 
     <string-array name="Città">
