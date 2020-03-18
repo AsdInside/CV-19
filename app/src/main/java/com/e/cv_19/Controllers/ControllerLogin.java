@@ -7,7 +7,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.e.cv_19.Activities.Activity_recupera_password;
 import com.e.cv_19.Activities.Activity_registrazione;
 import com.e.cv_19.Activities.Main_Activity;
@@ -79,7 +78,7 @@ public class ControllerLogin {
 
     public boolean isValidMail(String email) { return email.contains("@"); }
 
-    public boolean isValidPassword(String password, String ripeti_password) { return password.equals(ripeti_password) && password.length() > 4; }
+    public boolean isValidPassword(String password, String ripeti_password) { return password.equals(ripeti_password) && password.length() > 5; }
 
     //Metodo per Activity_recupera_password
 

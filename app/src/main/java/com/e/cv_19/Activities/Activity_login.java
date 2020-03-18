@@ -26,6 +26,7 @@ public class Activity_login extends AppCompatActivity {
         campo_email = findViewById(R.id.Editviewemail);
         campo_password = findViewById(R.id.editTextpassword);
         Controller.Auto_Login();
+
     }
 
 
@@ -48,7 +49,7 @@ public class Activity_login extends AppCompatActivity {
         if (!Controller.isValidMail(email)) {
             Toast.makeText(getApplicationContext(), "Inserire una mail valida", Toast.LENGTH_SHORT).show();
         } else if (!Controller.isValidPassword(password)) {
-            Toast.makeText(getApplicationContext(), "La password deve avere almeno 4 caratteri", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "La password deve avere almeno 6 caratteri", Toast.LENGTH_SHORT).show();
         } else {
             Controller.Effettua_login(email,password);
         }

@@ -54,6 +54,8 @@
     <string name="ricerca_avanzata">Ricerca Avanzata</string>
     <string name="menu">Menù</string>
     <string name="logout">Logout</string>
+    <string name="consiglia_viaggi_19">Consiglia Viaggi 19</string>
+    <string name="recupera_password">Recupera Password</string>
 
 
     <string-array name="Città">
