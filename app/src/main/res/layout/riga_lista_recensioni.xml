@@ -22,7 +22,9 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/struttura"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageViewStruttura"
@@ -44,7 +46,9 @@
         android:paddingLeft="5dp"
         android:paddingTop="8dp"
         android:paddingRight="5dp"
-        android:text="@string/testo_recensione" />
+        android:text="@string/testo_recensione"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewValutazione"
@@ -53,5 +57,7 @@
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
         android:paddingRight="5dp"
-        android:text="@string/valutazione" />
+        android:shadowColor="@color/design_default_color_primary_dark"
+        android:text="@string/valutazione"
+        android:textStyle="bold" />
 </LinearLayout>

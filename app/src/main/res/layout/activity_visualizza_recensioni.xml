@@ -17,7 +17,7 @@
         android:id="@+id/buttonIndietro"
         android:layout_width="146dp"
         android:layout_height="wrap_content"
-        android:background="#F5EC07"
+        android:background="@drawable/btnyellow"
         android:onClick="click_on_indietro"
         android:text="@string/Indietro" />
 

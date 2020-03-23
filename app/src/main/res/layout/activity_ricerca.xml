@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#601072A7"
     tools:context=".Activities.Activity_ricerca">
 
     <ImageButton
         android:id="@+id/imageButtonHotel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F7F0F0"
+        android:background="@drawable/hotel"
         android:contentDescription="@string/hotel"
         android:onClick="click_on_hotel"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,14 +19,13 @@
         app:layout_constraintHorizontal_bias="0.818"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/baseline_hotel_black_18dp" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <ImageButton
         android:id="@+id/imageButtonMenùLaterale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F7F0F0"
+        android:background="@drawable/menus"
         android:contentDescription="@string/menù_laterale"
         android:onClick="click_on_menù"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,14 +33,13 @@
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/baseline_reorder_black_24dp" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <ImageButton
         android:id="@+id/imageButtonLocalitàTuristiche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F7F0F0"
+        android:background="@drawable/museu"
         android:contentDescription="@string/località_turistiche"
         android:onClick="click_on_località_turistiche"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,14 +47,13 @@
         app:layout_constraintHorizontal_bias="0.957"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/baseline_account_balance_black_18dp" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <ImageButton
         android:id="@+id/imageButtonRistoranti"
         android:layout_width="42dp"
         android:layout_height="35dp"
-        android:background="#F7F0F0"
+        android:background="@drawable/rist"
         android:contentDescription="@string/ristoranti"
         android:onClick="click_on_ristoranti"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,8 +61,7 @@
         app:layout_constraintHorizontal_bias="0.677"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"
-        app:srcCompat="@drawable/baseline_local_dining_black_18dp" />
+        app:layout_constraintVertical_bias="0.022" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -87,7 +84,9 @@
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp" />
+            android:paddingRight="5dp"
+            android:textColor="@color/design_default_color_primary_dark"
+            android:textColorHint="@color/design_default_color_primary" />
 
         <ImageButton
             android:id="@+id/lente"
@@ -106,9 +105,11 @@
         android:id="@+id/buttonRicercaAvanzata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F5EC07"
+        android:background="@drawable/btnblu"
         android:onClick="Ricerca_avanzata"
         android:text="@string/Cerca"
+        android:textColor="#FFE400"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -161,40 +162,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/città"
-        android:textColor="#0C27CA"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textColorHint="@android:color/background_light"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
+        app:layout_constraintVertical_bias="0.483" />
 
     <TextView
         android:id="@+id/textViewCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/categoria"
-        android:textColor="#0C27CA"
+        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572" />
+        app:layout_constraintVertical_bias="0.591" />
 
     <TextView
         android:id="@+id/textViewRecensioni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/recensioni"
-        android:textColor="#0C27CA"
+        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.673" />
+        app:layout_constraintVertical_bias="0.691" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/reg"
     tools:context=".Activities.Main_Activity">
 
     <LinearLayout
@@ -27,14 +28,17 @@
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp" />
+            android:paddingRight="5dp"
+            android:textColor="@android:color/background_light"
+            android:textColorHint="@android:color/background_light"
+            android:textColorLink="#3F51B5" />
 
         <ImageButton
             android:id="@+id/lente"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#0C27CA"
+            android:background="@android:color/holo_orange_light"
             android:contentDescription="@string/cerca_struttura"
             android:onClick="Ricerca"
             android:paddingLeft="5dp"
@@ -80,7 +84,7 @@
         android:id="@+id/imageButtonLocalitàTuristiche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F7F0F0"
+        android:background="@drawable/museu"
         android:contentDescription="@string/località_turistiche"
         android:onClick="click_on_località_turistiche"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -88,14 +92,13 @@
         app:layout_constraintHorizontal_bias="0.957"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/baseline_account_balance_black_18dp" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <ImageButton
         android:id="@+id/imageButtonMenùLaterale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F7F0F0"
+        android:background="@drawable/menus"
         android:contentDescription="@string/menù_laterale"
         android:onClick="click_on_menù"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,14 +106,13 @@
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/baseline_reorder_black_24dp" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <ImageButton
         android:id="@+id/imageButtonHotel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F7F0F0"
+        android:background="@drawable/hotel"
         android:contentDescription="@string/hotel"
         android:onClick="click_on_hotel"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -118,14 +120,13 @@
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/baseline_hotel_black_18dp" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <ImageButton
         android:id="@+id/imageButtonRistoranti"
         android:layout_width="42dp"
         android:layout_height="35dp"
-        android:background="#F7F0F0"
+        android:background="@drawable/rist"
         android:contentDescription="@string/ristoranti"
         android:onClick="click_on_ristoranti"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -133,7 +134,6 @@
         app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"
-        app:srcCompat="@drawable/baseline_local_dining_black_18dp" />
+        app:layout_constraintVertical_bias="0.022" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

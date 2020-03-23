@@ -17,6 +17,7 @@
         android:paddingTop="5dp"
         android:paddingRight="5dp"
         android:paddingBottom="5dp"
+        android:textAlignment="center"
         app:srcCompat="@drawable/common_google_signin_btn_icon_disabled" />
 
     <TextView
@@ -31,12 +32,16 @@
         android:paddingRight="5dp"
         android:paddingBottom="5dp"
         android:text="@string/nome_struttura"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@android:color/background_light" />
 
     <TextView
         android:id="@+id/textViewValutazione"
         android:layout_width="match_parent"
         android:layout_height="37dp"
         android:gravity="center_horizontal"
-        android:text="@string/valutazione" />
+        android:text="@string/valutazione"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light" />
 </LinearLayout>
