@@ -174,10 +174,9 @@ public class ControllerStruttura {
     }
 
 
-    private boolean recensione_gia_scritta(final String user_id) {
+    public boolean recensione_gia_scritta(final String user_id) {
 
-        database.collection("Recensione").whereEqualTo("idAutore",user_id).get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        database.collection("Recensione").whereEqualTo("idAutore",user_id).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if(!queryDocumentSnapshots.isEmpty()){
