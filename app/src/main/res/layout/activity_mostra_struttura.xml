@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CE01014E"
+    android:background="#B901014E"
     android:foregroundTint="#FFEB3B"
     tools:context=".Activities.Activity_mostra_struttura">
 
