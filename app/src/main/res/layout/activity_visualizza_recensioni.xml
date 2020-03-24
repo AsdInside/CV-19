@@ -5,6 +5,7 @@
     android:id="@+id/LinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#601072A7"
     android:orientation="vertical"
     tools:context=".Activities.Activity_visualizza_recensioni">
 

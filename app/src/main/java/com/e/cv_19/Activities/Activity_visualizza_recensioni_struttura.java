@@ -4,6 +4,7 @@ package com.e.cv_19.Activities;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -28,7 +29,7 @@ public class Activity_visualizza_recensioni_struttura extends AppCompatActivity 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizza_recensioni_struttura);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         filtro_voto = findViewById(R.id.spinnerVoto);
         segnala = findViewById(R.id.buttonSegnala);
 
