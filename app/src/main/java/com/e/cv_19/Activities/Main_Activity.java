@@ -3,12 +3,12 @@ package com.e.cv_19.Activities;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.e.cv_19.Controllers.ControllerMain;
 import com.e.cv_19.R;
@@ -23,7 +23,7 @@ public class Main_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         campo_ricerca = findViewById(R.id.campo_ricerca);
         lista_strutture = findViewById(R.id.Strutture);
         Controller.mostra_strutture(lista_strutture);

@@ -4,6 +4,7 @@ package com.e.cv_19.Activities;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -32,7 +33,7 @@ public class Activity_mostra_struttura extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostra_struttura);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         campo_ricerca = findViewById(R.id.campo_ricerca);
         testo_recensione= findViewById(R.id.editTextTestoRecensione);
         voto_recensione = findViewById(R.id.spinnerVoto);

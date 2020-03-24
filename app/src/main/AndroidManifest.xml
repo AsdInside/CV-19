@@ -15,7 +15,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
+
         <activity android:name=".Activities.Activity_menu"/>
         <activity android:name=".Activities.Activity_richiesta_cancellazione" />
         <activity android:name=".Activities.Activity_visualizza_recensioni_struttura" />
@@ -34,8 +36,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:name=".Activities.Activity_visualizza_mappa"
             android:label="@string/title_activity_visualizza_mappa" />
+
         <activity android:name=".Activities.Activity_mostra_struttura" />
         <activity android:name=".Activities.Main_Activity" />
         <activity android:name=".Activities.Activity_modifica_impostazioni" />
@@ -43,6 +47,7 @@
         <activity android:name=".Activities.Activity_visualizza_recensioni" />
         <activity android:name=".Activities.Activity_registrazione" />
         <activity android:name=".Activities.Activity_login">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
